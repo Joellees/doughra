@@ -1159,61 +1159,192 @@
     #cart-summary { color: var(--butter-rich) !important; font-weight: 500; }
     .btn-wa { border-radius: 100px !important; padding: 0.95rem 1.75rem !important; }
 
-    /* ─── BREAD SCHOOL (BENTO) ─────────────────────────────────── */
+    /* ─── THE LOAVES — editorial diagram cards ─────────────────── */
+    #bread-school { background: var(--ivory-lite); }
     .bread-grid {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      grid-auto-rows: minmax(min-content, auto);
-      gap: 1.25rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
     }
+    @media (max-width: 900px) { .bread-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .bread-grid { grid-template-columns: 1fr; } }
+
     .bread-card {
-      grid-column: span 2;
-      background: var(--butter-lite) !important;
+      background: var(--ivory);
       border: 1px solid rgba(90, 56, 32, 0.08) !important;
       border-radius: var(--radius-lg) !important;
-      padding: 1.85rem 1.6rem !important;
+      padding: 0 !important;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
       transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease) !important;
     }
     .bread-card:hover {
       transform: translateY(-4px) !important;
       border-color: var(--brown-fog) !important;
-      box-shadow: 0 20px 40px -20px rgba(26, 19, 16, 0.18);
+      box-shadow: 0 24px 48px -24px rgba(26, 19, 16, 0.22);
     }
-    .bread-card:nth-child(1) { grid-column: span 3; }
-    .bread-card:nth-child(4) { grid-column: span 3; }
-    @media (max-width: 900px) {
-      .bread-grid { grid-template-columns: repeat(2, 1fr); }
-      .bread-card,
-      .bread-card:nth-child(1),
-      .bread-card:nth-child(4) { grid-column: span 1; }
+
+    /* Image + floating callouts */
+    .loaf-viz {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      background: var(--bone);
+      overflow: hidden;
+      border-bottom: 1px solid rgba(90, 56, 32, 0.08);
     }
-    @media (max-width: 600px) {
-      .bread-grid { grid-template-columns: 1fr; }
+    .loaf-viz img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s var(--ease);
+    }
+    .bread-card:hover .loaf-viz img { transform: scale(1.03); }
+
+    /* Dashed-line callouts pinned to bread parts */
+    .loaf-callout {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .loaf-callout .callout-line {
+      width: 28px;
+      height: 1px;
+      border-top: 1px dashed rgba(26, 19, 16, 0.75);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .loaf-callout .callout-line::before {
+      content: '';
+      position: absolute;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--ink);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .loaf-callout .callout-label {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: rgba(250, 247, 240, 0.92);
+      backdrop-filter: blur(2px);
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+    /* callout variants — line sits between the bread (dot) and the label */
+    .loaf-callout--tl { top: 12%; left: 5%; flex-direction: row-reverse; }
+    .loaf-callout--tl .callout-line::before { left: auto; right: 0; }
+    .loaf-callout--tr { top: 14%; right: 5%; }
+    .loaf-callout--tr .callout-line::before { left: 0; }
+    .loaf-callout--mr { top: 48%; right: 5%; }
+    .loaf-callout--mr .callout-line::before { left: 0; }
+    .loaf-callout--bl { bottom: 12%; left: 5%; flex-direction: row-reverse; }
+    .loaf-callout--bl .callout-line::before { left: auto; right: 0; }
+    .loaf-callout--br { bottom: 12%; right: 5%; }
+    .loaf-callout--br .callout-line::before { left: 0; }
+
+    /* Body */
+    .bread-card-body {
+      padding: 1.5rem 1.5rem 1.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      flex: 1;
     }
     .bread-card-name {
       font-family: 'Instrument Serif', serif !important;
-      font-size: 1.75rem !important;
-      font-weight: 500 !important;
-      color: var(--espresso);
-      margin-bottom: 1.25rem !important;
+      font-style: italic;
+      font-size: 2rem !important;
+      font-weight: 400 !important;
+      color: var(--ink) !important;
+      line-height: 1 !important;
+      letter-spacing: -0.015em;
+      margin: 0 !important;
     }
-    .bread-benefits li { color: var(--brown-soft) !important; }
-    .bread-benefits li::before { background: var(--brown) !important; }
+    .bread-card-kicker {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.73rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brown);
+      line-height: 1.5;
+      margin: 0;
+    }
     .bread-fun-fact {
-      border-left: 2px solid var(--brown) !important;
-      background: rgba(90, 56, 32, 0.05);
-      padding: 0.85rem 1rem !important;
-      border-radius: 0 10px 10px 0;
-      color: var(--brown-mid) !important;
+      border-left: 2px solid var(--cognac) !important;
+      background: rgba(184, 134, 94, 0.07);
+      padding: 0.75rem 0.9rem !important;
+      border-radius: 0 8px 8px 0;
+      color: var(--brown) !important;
       font-family: 'Inter Tight', sans-serif !important;
-      font-size: 0.78rem !important;
-      line-height: 1.6 !important;
+      font-size: 0.8rem !important;
+      line-height: 1.55 !important;
+      margin: 0.25rem 0 0 !important;
     }
     .bread-fun-fact strong {
-      color: var(--brown-deep) !important;
+      color: var(--ink) !important;
       font-family: 'Instrument Serif', serif;
       font-style: italic;
-      font-weight: 500;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+
+    /* Foot — price + add to cart */
+    .bread-card-foot {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid rgba(90, 56, 32, 0.08);
+    }
+    .bread-card-price {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .btn-add-cart {
+      background: var(--ink);
+      color: var(--ivory-lite);
+      border: none;
+      border-radius: 100px;
+      padding: 0.6rem 1.1rem;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+    }
+    .btn-add-cart:hover {
+      background: var(--ink-soft);
+      transform: translateY(-1px);
+    }
+    .btn-add-cart.in-cart {
+      background: var(--cognac);
+      color: var(--ivory-lite);
+    }
+    .btn-add-cart.in-cart:hover { background: var(--cognac-deep); }
+
+    @media (max-width: 600px) {
+      .loaf-callout .callout-label { font-size: 0.62rem; padding: 0.15rem 0.4rem; }
+      .loaf-callout .callout-line { width: 20px; }
+      .bread-card-name { font-size: 1.75rem !important; }
     }
 
     /* ─── WORKSHOP CARDS ───────────────────────────────────────── */
@@ -1462,9 +1593,9 @@
     <div class="nav-inner">
       <a href="#hero" class="nav-logo">Doughra</a>
       <ul class="nav-links">
-        <li><a href="#shop">Shop</a></li>
-        <li><a href="#bread-school">Bread School</a></li>
-        <li><a href="#workshops">Workshops</a></li>
+        <li><a href="#shop">Bakery</a></li>
+        <li><a href="#bread-school">Loaves</a></li>
+        <li><a href="#workshops">Bread School</a></li>
         <li><a href="#pay">Pay</a></li>
         <li><a href="#find-us">Find Us</a></li>
       </ul>
@@ -1478,9 +1609,9 @@
 
 <!-- mobile drawer -->
 <div class="nav-drawer" id="nav-drawer">
-  <a href="#shop" onclick="closeDrawer()">Shop</a>
-  <a href="#bread-school" onclick="closeDrawer()">Bread School</a>
-  <a href="#workshops" onclick="closeDrawer()">Workshops</a>
+  <a href="#shop" onclick="closeDrawer()">Bakery</a>
+  <a href="#bread-school" onclick="closeDrawer()">Loaves</a>
+  <a href="#workshops" onclick="closeDrawer()">Bread School</a>
   <a href="#pay" onclick="closeDrawer()">Pay</a>
   <a href="#find-us" onclick="closeDrawer()">Find Us</a>
   <a href="#shop" class="btn btn-primary" style="margin-top:0.5rem;text-align:center;" onclick="closeDrawer()">Order now</a>
@@ -1548,8 +1679,8 @@
 <section id="shop">
   <div class="container">
     <div class="section-header">
-      <span class="section-label">The Menu</span>
-      <h2>Shop</h2>
+      <span class="section-label">Order</span>
+      <h2>The Bakery</h2>
       <div class="divider"></div>
       <p style="color:var(--text-muted);max-width:520px;">Handcrafted in small batches. Add what you want, then send us your order on WhatsApp — we'll take it from there.</p>
     </div>
@@ -1840,15 +1971,16 @@
             <span class="emoji">🫙</span>
           </div>
           <div class="product-body">
-            <p class="product-name">The Starter Kit</p>
-            <p class="product-desc">Live sourdough starter, care instructions &amp; extras — everything you need to begin.</p>
-            <div class="card-made-to-order">Made to order — contact us for availability.</div>
-            <div class="product-controls" style="margin-top:1rem;">
-              <p class="product-price">Price TBD</p>
-              <a href="https://wa.me/971500000000?text=Hi%20Doughra!%20I'm%20interested%20in%20The%20Starter%20Kit.%20Could%20you%20share%20more%20details%20and%20availability%3F" target="_blank" class="btn btn-wa" style="padding:0.6rem 1rem;font-size:0.72rem;">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                WhatsApp us
-              </a>
+            <p class="product-name">Sourdough Starter</p>
+            <p class="product-desc">Live, active, ready to bake. A 100g jar of our house ferment with a printed care card — everything you need to begin your own.</p>
+            <div class="product-tags"><span class="tag">100g jar</span><span class="tag">made to order</span></div>
+            <div class="product-controls">
+              <p class="product-price">350 AED</p>
+              <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('starter',-1)">−</button>
+                <span class="qty-display" id="qty-starter">0</span>
+                <button class="qty-btn" onclick="changeQty('starter',1)">+</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1880,7 +2012,7 @@
   <div class="container">
     <div class="section-header">
       <span class="section-label">Know Your Bread</span>
-      <h2>Bread School</h2>
+      <h2>The Loaves</h2>
       <div class="divider"></div>
       <p style="color:var(--text-muted);max-width:520px;">Every loaf tells a story. Here's what's actually happening in each one — and why it matters for your body.</p>
     </div>
@@ -1888,70 +2020,118 @@
     <div class="bread-grid">
 
       <!-- The Classic -->
-      <div class="bread-card">
-        <p class="bread-card-name">The Classic</p>
-        <ul class="bread-benefits">
-          <li>Long fermentation = easier digestion</li>
-          <li>Lower glycaemic index than regular bread</li>
-          <li>Natural probiotics from wild yeast</li>
-        </ul>
-        <p class="bread-fun-fact"><strong>Did you know?</strong> The long fermentation process breaks down gluten proteins, making sourdough easier to digest even for some gluten-sensitive people.</p>
-      </div>
+      <article class="bread-card" data-loaf="classic">
+        <div class="loaf-viz">
+          <img src="images/classic.jpg" alt="The Classic sourdough — cross-section" loading="lazy">
+          <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">36h ferment</span></span>
+          <span class="loaf-callout loaf-callout--tr"><span class="callout-line"></span><span class="callout-label">Wild yeast</span></span>
+          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Open crumb</span></span>
+        </div>
+        <div class="bread-card-body">
+          <p class="bread-card-name">The Classic</p>
+          <p class="bread-card-kicker">Long fermented · Naturally leavened · Gut-friendly</p>
+          <p class="bread-fun-fact"><strong>Did you know?</strong> The long fermentation breaks down gluten proteins, making sourdough easier to digest — even for some gluten-sensitive eaters.</p>
+          <div class="bread-card-foot">
+            <span class="bread-card-price">from 24 AED</span>
+            <button class="btn btn-add-cart" data-add="classic" onclick="changeQty('classic',1)">Add to cart</button>
+          </div>
+        </div>
+      </article>
 
       <!-- The Rye -->
-      <div class="bread-card">
-        <p class="bread-card-name">The Rye</p>
-        <ul class="bread-benefits">
-          <li>High fibre content — keeps you full longer</li>
-          <li>Supports gut microbiome diversity</li>
-          <li>Lower insulin response than wheat bread</li>
-        </ul>
-        <p class="bread-fun-fact"><strong>Did you know?</strong> Rye contains a unique type of fibre called arabinoxylan that feeds beneficial gut bacteria more effectively than most other grains.</p>
-      </div>
+      <article class="bread-card" data-loaf="rye">
+        <div class="loaf-viz">
+          <img src="images/rye.jpg" alt="The Rye sourdough — cross-section" loading="lazy">
+          <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">High fibre</span></span>
+          <span class="loaf-callout loaf-callout--mr"><span class="callout-line"></span><span class="callout-label">Dark crumb</span></span>
+          <span class="loaf-callout loaf-callout--bl"><span class="callout-line"></span><span class="callout-label">Low GI</span></span>
+        </div>
+        <div class="bread-card-body">
+          <p class="bread-card-name">The Rye</p>
+          <p class="bread-card-kicker">High-fibre · Microbiome fuel · Earthy &amp; deep</p>
+          <p class="bread-fun-fact"><strong>Did you know?</strong> Rye contains a unique fibre called arabinoxylan that feeds beneficial gut bacteria more effectively than most other grains.</p>
+          <div class="bread-card-foot">
+            <span class="bread-card-price">from 24 AED</span>
+            <button class="btn btn-add-cart" data-add="rye" onclick="changeQty('rye',1)">Add to cart</button>
+          </div>
+        </div>
+      </article>
 
       <!-- The Protein -->
-      <div class="bread-card">
-        <p class="bread-card-name">The Protein</p>
-        <ul class="bread-benefits">
-          <li>Macro-friendly — fits any training diet</li>
-          <li>Supports muscle recovery post-workout</li>
-          <li>Satiating — fewer cravings throughout the day</li>
-        </ul>
-        <p class="bread-fun-fact"><strong>Did you know?</strong> Higher protein content per slice means you get the carb satisfaction of bread while staying closer to your macros — no compromises.</p>
-      </div>
+      <article class="bread-card" data-loaf="protein">
+        <div class="loaf-viz">
+          <img src="images/protein.jpg" alt="The Protein sourdough — cross-section" loading="lazy">
+          <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">+Protein</span></span>
+          <span class="loaf-callout loaf-callout--tr"><span class="callout-line"></span><span class="callout-label">Seeds &amp; grains</span></span>
+          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Macro-friendly</span></span>
+        </div>
+        <div class="bread-card-body">
+          <p class="bread-card-name">The Protein</p>
+          <p class="bread-card-kicker">Macro-friendly · Satisfying · Training-fuel</p>
+          <p class="bread-fun-fact"><strong>Did you know?</strong> Higher protein per slice gives you the carb-satisfaction of bread while staying closer to your macros. No compromises.</p>
+          <div class="bread-card-foot">
+            <span class="bread-card-price">from 24 AED</span>
+            <button class="btn btn-add-cart" data-add="protein" onclick="changeQty('protein',1)">Add to cart</button>
+          </div>
+        </div>
+      </article>
 
       <!-- The Manoushe -->
-      <div class="bread-card">
-        <p class="bread-card-name">The Manoushe</p>
-        <ul class="bread-benefits">
-          <li>Za'atar is rich in antioxidants &amp; thymol</li>
-          <li>Olive oil provides heart-healthy monounsaturated fats</li>
-          <li>Centuries of Lebanese culinary heritage</li>
-        </ul>
-        <p class="bread-fun-fact"><strong>Did you know?</strong> Za'atar has been used in the Levant for over 2,000 years — not just for flavour, but as a natural antimicrobial and brain booster.</p>
-      </div>
+      <article class="bread-card" data-loaf="manoushe">
+        <div class="loaf-viz">
+          <img src="images/manoushe.jpg" alt="The Manoushe za'atar flatbread" loading="lazy">
+          <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">Za'atar</span></span>
+          <span class="loaf-callout loaf-callout--mr"><span class="callout-line"></span><span class="callout-label">Olive oil</span></span>
+          <span class="loaf-callout loaf-callout--bl"><span class="callout-line"></span><span class="callout-label">Thymol-rich</span></span>
+        </div>
+        <div class="bread-card-body">
+          <p class="bread-card-name">The Manoushe</p>
+          <p class="bread-card-kicker">Antioxidant-rich · Heart-healthy · Levantine heritage</p>
+          <p class="bread-fun-fact"><strong>Did you know?</strong> Za'atar has been used in the Levant for over 2,000 years — not just for flavour, but as a natural antimicrobial and brain booster.</p>
+          <div class="bread-card-foot">
+            <span class="bread-card-price">from 24 AED</span>
+            <button class="btn btn-add-cart" data-add="manoushe" onclick="changeQty('manoushe',1)">Add to cart</button>
+          </div>
+        </div>
+      </article>
 
       <!-- The Spicy One -->
-      <div class="bread-card">
-        <p class="bread-card-name">The Spicy One</p>
-        <ul class="bread-benefits">
-          <li>Capsaicin gives a natural metabolism boost</li>
-          <li>Cheddar adds calcium and protein</li>
-          <li>Bold comfort food — elevated</li>
-        </ul>
-        <p class="bread-fun-fact"><strong>Did you know?</strong> Capsaicin — the compound that makes jalapeños hot — has been shown to temporarily increase metabolic rate by up to 8%.</p>
-      </div>
+      <article class="bread-card" data-loaf="spicy">
+        <div class="loaf-viz">
+          <img src="images/spicy.jpg" alt="The Spicy One — jalapeño cheddar sourdough" loading="lazy">
+          <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">Jalapeño</span></span>
+          <span class="loaf-callout loaf-callout--tr"><span class="callout-line"></span><span class="callout-label">Aged cheddar</span></span>
+          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Slow bake</span></span>
+        </div>
+        <div class="bread-card-body">
+          <p class="bread-card-name">The Spicy One</p>
+          <p class="bread-card-kicker">Metabolism boost · Calcium &amp; protein · Bold comfort</p>
+          <p class="bread-fun-fact"><strong>Did you know?</strong> Capsaicin — the compound that makes jalapeños hot — has been shown to temporarily raise metabolic rate by up to 8%.</p>
+          <div class="bread-card-foot">
+            <span class="bread-card-price">from 24 AED</span>
+            <button class="btn btn-add-cart" data-add="spicy" onclick="changeQty('spicy',1)">Add to cart</button>
+          </div>
+        </div>
+      </article>
 
       <!-- The Sweet One -->
-      <div class="bread-card">
-        <p class="bread-card-name">The Sweet One</p>
-        <ul class="bread-benefits">
-          <li>Goat cheese is easier to digest than cow dairy</li>
-          <li>Honey is a natural sweetener with antimicrobial properties</li>
-          <li>Perfectly balanced sweet-savoury contrast</li>
-        </ul>
-        <p class="bread-fun-fact"><strong>Did you know?</strong> Goat milk is naturally homogenised, forming smaller fat globules than cow milk — which makes it gentler on the digestive system.</p>
-      </div>
+      <article class="bread-card" data-loaf="sweet">
+        <div class="loaf-viz">
+          <img src="images/sweet.jpg" alt="The Sweet One — honey goat cheese sourdough" loading="lazy">
+          <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">Goat cheese</span></span>
+          <span class="loaf-callout loaf-callout--mr"><span class="callout-line"></span><span class="callout-label">Raw honey</span></span>
+          <span class="loaf-callout loaf-callout--bl"><span class="callout-line"></span><span class="callout-label">Sweet-savoury</span></span>
+        </div>
+        <div class="bread-card-body">
+          <p class="bread-card-name">The Sweet One</p>
+          <p class="bread-card-kicker">Easy on digestion · Natural sweetener · Balanced</p>
+          <p class="bread-fun-fact"><strong>Did you know?</strong> Goat milk is naturally homogenised — smaller fat globules than cow milk — which makes it gentler on the digestive system.</p>
+          <div class="bread-card-foot">
+            <span class="bread-card-price">from 24 AED</span>
+            <button class="btn btn-add-cart" data-add="sweet" onclick="changeQty('sweet',1)">Add to cart</button>
+          </div>
+        </div>
+      </article>
 
     </div>
   </div>
@@ -1965,7 +2145,7 @@
   <div class="container">
     <div class="section-header">
       <span class="section-label">Learn to Bake</span>
-      <h2>Workshops</h2>
+      <h2>Bread School</h2>
       <div class="divider"></div>
       <p style="color:var(--text-muted);max-width:520px;">Hands-on baking sessions in Arjan, Dubai. Leave with a loaf you made yourself and the knowledge to keep baking.</p>
     </div>
@@ -2214,9 +2394,9 @@
     <div class="footer-inner">
       <p class="footer-logo">Doughra</p>
       <ul class="footer-nav">
-        <li><a href="#shop">Shop</a></li>
-        <li><a href="#bread-school">Bread School</a></li>
-        <li><a href="#workshops">Workshops</a></li>
+        <li><a href="#shop">Bakery</a></li>
+        <li><a href="#bread-school">Loaves</a></li>
+        <li><a href="#workshops">Bread School</a></li>
         <li><a href="#pay">Pay</a></li>
         <li><a href="#find-us">Find Us</a></li>
       </ul>
@@ -2265,6 +2445,7 @@
     chocbombs:     { name: 'Chocolate Bombs',      loaf: false, price: 20 },
     brownie:       { name: 'The Brownie',          loaf: false, price: 40 },
     healthybrownie:{ name: 'The Healthy Brownie',  loaf: false, price: 55 },
+    starter:       { name: 'Sourdough Starter (100g)', loaf: false, price: 350 },
   };
 
   // cart: { id: { name, size|null, qty, unitPrice } }
@@ -2293,11 +2474,21 @@
   }
 
   function changeQty(id, delta) {
-    const qtyEl = document.getElementById('qty-' + id);
     const current = cart[id] ? cart[id].qty : 0;
     const newQty  = Math.max(0, current + delta);
 
-    qtyEl.textContent = newQty;
+    // primary qty display in the shop card
+    const qtyEl = document.getElementById('qty-' + id);
+    if (qtyEl) qtyEl.textContent = newQty;
+    // mirror qty on any secondary displays (e.g. loaf info cards)
+    document.querySelectorAll('[data-qty="' + id + '"]').forEach(el => {
+      el.textContent = newQty;
+    });
+    // toggle "in cart" state on add-to-cart buttons for this product
+    document.querySelectorAll('[data-add="' + id + '"]').forEach(el => {
+      el.classList.toggle('in-cart', newQty > 0);
+      el.textContent = newQty > 0 ? 'In cart · ' + newQty : 'Add to cart';
+    });
 
     const p = PRODUCTS[id];
     if (newQty === 0) {
