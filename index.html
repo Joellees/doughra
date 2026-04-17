@@ -141,13 +141,6 @@
       border: 1px solid var(--border);
     }
     .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
-    .btn-wa {
-      background: #25D366;
-      color: #fff;
-      gap: 0.6rem;
-    }
-    .btn-wa:hover { background: #1fb855; transform: translateY(-1px); }
-    .btn-wa svg { flex-shrink: 0; }
 
     /* ─── NAV ───────────────────────────────────────────────────── */
     #nav {
@@ -313,27 +306,26 @@
     .hero-link:hover { color: var(--gold); border-color: var(--gold); }
     .hero-scroll {
       position: absolute;
-      bottom: 2.5rem;
+      bottom: 2rem;
       left: 50%;
       transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text-muted);
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+      color: var(--gold);
+      pointer-events: none;
     }
-    .hero-scroll-line {
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-      animation: scrollPulse 2s ease-in-out infinite;
+    .hero-scroll svg { display: block; }
+    .hero-scroll .chev {
+      animation: chevWave 1.6s ease-in-out infinite;
+      opacity: 0;
+      transform-origin: center;
     }
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
+    .hero-scroll .chev-1 { animation-delay: 0s; }
+    .hero-scroll .chev-2 { animation-delay: 0.22s; }
+    @keyframes chevWave {
+      0%, 100% { opacity: 0; }
+      40%, 60% { opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-scroll .chev { animation: none; opacity: 0.75; }
     }
 
     /* ─── SECTION COMMONS ───────────────────────────────────────── */
@@ -482,34 +474,6 @@
       font-size: 0.75rem;
       color: var(--gold);
       margin-top: 0.25rem;
-    }
-
-    /* WhatsApp order bar */
-    .order-bar {
-      margin-top: 3.5rem;
-      padding: 1.75rem 2rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .order-bar-info { flex: 1; min-width: 200px; }
-    .order-bar-title {
-      font-family: 'Instrument Serif', serif;
-      font-size: 1.35rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-    .order-bar-sub { font-size: 0.78rem; color: var(--text-muted); }
-    #cart-summary {
-      font-size: 0.78rem;
-      color: var(--gold);
-      margin-top: 0.4rem;
-      min-height: 1.1em;
     }
 
     /* ─── BREAD SCHOOL ──────────────────────────────────────────── */
@@ -678,40 +642,6 @@
     }
     .map-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
 
-    /* ─── FIND US ───────────────────────────────────────────────── */
-    #find-us { background: var(--surface); text-align: center; }
-    .find-us-delivery {
-      font-family: 'Instrument Serif', serif;
-      font-size: clamp(1.1rem, 3vw, 1.5rem);
-      font-style: italic;
-      color: var(--text-muted);
-      margin-bottom: 2.5rem;
-    }
-    .find-us-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-    .find-us-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-family: 'Inter Tight', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text);
-      text-decoration: none;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 0.8rem 1.4rem;
-      transition: border-color 0.25s, color 0.25s, transform 0.2s;
-    }
-    .find-us-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
-    .find-us-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
-
     /* ─── FOOTER ────────────────────────────────────────────────── */
     footer {
       background: var(--bg);
@@ -772,7 +702,6 @@
     @media (max-width: 600px) {
       .bread-grid { grid-template-columns: 1fr; }
       .workshop-grid { grid-template-columns: 1fr; }
-      .order-bar { flex-direction: column; align-items: flex-start; }
       .product-grid { grid-template-columns: 1fr; }
     }
 
@@ -792,8 +721,6 @@
     .product-name, .product-price,
     .bread-card-name, .bread-fun-fact,
     .workshop-name,
-    .order-bar-title,
-    .find-us-delivery,
     .form-sub-header h3,
     .form-success {
       font-family: 'Instrument Serif', Georgia, serif;
@@ -958,7 +885,6 @@
     }
     .hero-link:hover { color: var(--espresso) !important; border-color: var(--espresso) !important; }
     .hero-scroll { color: var(--brown-mid); }
-    .hero-scroll-line { background: linear-gradient(to bottom, var(--brown-mid), transparent); }
 
     /* ─── MODERN BUTTONS ──────────────────────────────────────── */
     .btn {
@@ -1033,7 +959,6 @@
     #shop { background: var(--bg); }
     #bread-school { background: var(--surface); }
     #workshops { background: var(--bg); }
-    #find-us { background: var(--surface); }
 
     .section-label {
       display: inline-flex !important;
@@ -1144,20 +1069,6 @@
       border-radius: 12px !important;
       font-weight: 500;
     }
-
-    /* Order bar — sticky feel */
-    .order-bar {
-      background: var(--espresso) !important;
-      color: var(--butter) !important;
-      border: none !important;
-      border-radius: var(--radius-xl) !important;
-      padding: 2rem !important;
-      box-shadow: 0 20px 50px -20px rgba(26, 19, 16, 0.3);
-    }
-    .order-bar-title { color: var(--butter-lite); }
-    .order-bar-sub { color: rgba(245, 241, 232, 0.6) !important; }
-    #cart-summary { color: var(--butter-rich) !important; font-weight: 500; }
-    .btn-wa { border-radius: 100px !important; padding: 0.95rem 1.75rem !important; }
 
     /* ─── THE LOAVES — editorial diagram cards ─────────────────── */
     #bread-school { background: var(--ivory-lite); }
@@ -1399,142 +1310,6 @@
       border-color: var(--brown-fog) !important;
     }
 
-    /* ─── PAYMENT SECTION ──────────────────────────────────────── */
-    #pay {
-      background: linear-gradient(180deg, var(--espresso) 0%, var(--brown-deep) 100%) !important;
-      color: var(--butter);
-      padding: clamp(4.5rem, 9vw, 7rem) 0;
-      position: relative;
-      overflow: hidden;
-    }
-    #pay .container { position: relative; }
-    #pay .section-header { text-align: center; margin-bottom: 3.5rem; }
-    #pay .section-label {
-      color: var(--butter-rich) !important;
-      justify-content: center;
-    }
-    #pay .section-label::before { background: var(--butter-rich); }
-    #pay h2 { color: var(--butter-lite); margin: 0 auto; }
-    #pay .pay-sub {
-      color: rgba(245, 241, 232, 0.65);
-      max-width: 560px;
-      margin: 1.25rem auto 0;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
-    .pay-steps {
-      list-style: none;
-      padding: 0;
-      margin: 0 auto;
-      max-width: 1000px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
-    }
-    .pay-step {
-      background: rgba(245, 241, 232, 0.04);
-      border: 1px solid rgba(237, 230, 214, 0.10);
-      border-radius: var(--radius-xl);
-      padding: 1.75rem 1.5rem 1.75rem;
-      position: relative;
-      transition: background 0.3s var(--ease), border-color 0.3s var(--ease), transform 0.3s var(--ease);
-    }
-    .pay-step:hover {
-      background: rgba(245, 241, 232, 0.06);
-      border-color: rgba(237, 230, 214, 0.18);
-      transform: translateY(-2px);
-    }
-    .pay-step-num {
-      font-family: 'Instrument Serif', serif;
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      color: var(--butter-rich);
-      display: block;
-      margin-bottom: 1.5rem;
-    }
-    .pay-step-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: rgba(237, 230, 214, 0.10);
-      color: var(--butter-rich);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.25rem;
-    }
-    .pay-step-icon svg { width: 22px; height: 22px; }
-    .pay-step h3 {
-      font-family: 'Instrument Serif', serif;
-      font-size: 1.35rem;
-      font-weight: 500;
-      color: var(--butter-lite);
-      margin: 0 0 0.55rem;
-      letter-spacing: -0.01em;
-    }
-    .pay-step p {
-      color: rgba(245, 241, 232, 0.68);
-      font-size: 0.92rem;
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    .pay-cta {
-      text-align: center;
-      margin-top: 3rem;
-    }
-    .btn-whatsapp {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      background: var(--butter-lite);
-      color: var(--espresso);
-      padding: 1.05rem 1.75rem;
-      border-radius: 100px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: transform 0.2s var(--ease), box-shadow 0.3s var(--ease);
-      box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.45);
-    }
-    .btn-whatsapp:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 18px 42px -14px rgba(0, 0, 0, 0.55);
-    }
-    .btn-whatsapp svg { width: 18px; height: 18px; color: #25D366; }
-    .pay-trust {
-      margin-top: 1.25rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(245, 241, 232, 0.42);
-    }
-
-    @media (max-width: 820px) {
-      .pay-steps { grid-template-columns: 1fr; gap: 1rem; }
-    }
-
-    /* ─── FIND US ──────────────────────────────────────────────── */
-    .find-us-btn {
-      background: var(--butter-lite);
-      border: 1px solid var(--brown-fog) !important;
-      border-radius: 100px !important;
-      color: var(--espresso) !important;
-      padding: 0.85rem 1.4rem !important;
-      font-size: 0.74rem !important;
-    }
-    .find-us-btn:hover {
-      background: var(--brown) !important;
-      color: var(--butter-lite) !important;
-      border-color: var(--brown) !important;
-      transform: translateY(-2px);
-    }
-    .find-us-delivery { color: var(--brown-mid) !important; }
-
     /* ─── FOOTER ───────────────────────────────────────────────── */
     footer {
       background: var(--bone) !important;
@@ -1580,6 +1355,422 @@
       [data-reveal] { opacity: 1; transform: none; transition: none; }
       .marquee-track, .hero-eyebrow::before { animation: none !important; }
     }
+
+    /* ═══════════════════════════════════════════════════════════════
+       NAV CART BUTTON
+    ══════════════════════════════════════════════════════════════════ */
+    .nav-cart {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--cognac);
+      color: var(--ivory-lite);
+      border: none;
+      padding: 0.55rem 1rem;
+      border-radius: 100px;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      margin-left: 1.5rem;
+      transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+    }
+    .nav-cart:hover { background: var(--cognac-deep); transform: translateY(-1px); }
+    .nav-cart svg { display: block; flex-shrink: 0; }
+    .nav-cart-count { min-width: 1ch; text-align: center; line-height: 1; }
+    @media (max-width: 900px) {
+      .nav-cart { padding: 0.4rem 0.75rem; margin-left: 0.75rem; font-size: 0.72rem; }
+      .nav-cart svg { width: 15px; height: 15px; }
+    }
+    @media (max-width: 700px) {
+      .nav-cart { margin-right: 0.4rem; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SHOP CART NUDGE (replaces the old order-bar)
+    ══════════════════════════════════════════════════════════════════ */
+    .shop-cart-nudge {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: var(--ivory-lite);
+      border: 1px solid rgba(90, 56, 32, 0.08);
+      border-radius: var(--radius-xl);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .shop-cart-nudge p {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--ink);
+      margin: 0;
+    }
+    @media (max-width: 600px) {
+      .shop-cart-nudge { flex-direction: column; align-items: stretch; text-align: center; padding: 1.5rem; }
+      .shop-cart-nudge .btn { width: 100%; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       NEW FOOTER (merged with Find Us content)
+    ══════════════════════════════════════════════════════════════════ */
+    footer { padding: 4rem 0 2rem; }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1.5fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(90, 56, 32, 0.12);
+    }
+    @media (max-width: 800px) {
+      .footer-top { grid-template-columns: 1fr; gap: 2.25rem; }
+    }
+    .footer-brand .footer-logo { font-size: 2rem; margin-bottom: 0.5rem; }
+    .footer-tagline {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.8rem;
+      color: var(--brown-mid);
+      letter-spacing: 0.04em;
+      margin: 0;
+    }
+    .footer-col-label {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin: 0 0 1rem;
+    }
+    .footer-nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .footer-nav a {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.9rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .footer-delivery {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.9rem;
+      color: var(--brown);
+      margin: 0 0 1rem;
+    }
+    .footer-channels {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.6rem;
+    }
+    .footer-channel {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.65rem 0.9rem;
+      border: 1px solid rgba(90, 56, 32, 0.16);
+      border-radius: 100px;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      background: rgba(250, 247, 240, 0.45);
+      transition: all 0.2s var(--ease);
+    }
+    .footer-channel:hover {
+      background: var(--ink);
+      color: var(--ivory-lite);
+      border-color: var(--ink);
+    }
+    .footer-channel svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .footer-bottom {
+      padding-top: 1.5rem;
+      text-align: center;
+    }
+    .footer-bottom .footer-copy {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.78rem;
+      color: var(--brown-mid);
+      margin: 0;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       CART PAGE (full-viewport overlay)
+    ══════════════════════════════════════════════════════════════════ */
+    #cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--ivory-lite);
+      z-index: 300;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.25s var(--ease);
+    }
+    body.cart-open { overflow: hidden; }
+    body.cart-open #cart-overlay { display: block; opacity: 1; }
+
+    .cart-page {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+    }
+    .cart-header {
+      background: var(--ivory-lite);
+      border-bottom: 1px solid rgba(90, 56, 32, 0.1);
+      padding: 1.1rem 0;
+      flex-shrink: 0;
+    }
+    .cart-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .cart-back, .cart-close {
+      background: none;
+      border: none;
+      color: var(--ink);
+      cursor: pointer;
+      padding: 0.5rem 0.6rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: 6px;
+      transition: background 0.2s var(--ease);
+    }
+    .cart-back:hover, .cart-close:hover { background: rgba(90, 56, 32, 0.06); }
+    .cart-close { width: 38px; height: 38px; padding: 0; justify-content: center; }
+    .cart-title {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+    .cart-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 2.5rem 0 2rem;
+      -webkit-overflow-scrolling: touch;
+    }
+    .cart-items {
+      border-top: 1px solid rgba(90, 56, 32, 0.12);
+    }
+    .cart-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid rgba(90, 56, 32, 0.08);
+    }
+    .cart-row-info { min-width: 0; }
+    .cart-row-name {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 0 0 0.25rem;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+    .cart-row-meta {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.78rem;
+      color: var(--brown-mid);
+      margin: 0;
+      letter-spacing: 0.02em;
+    }
+    .cart-row-remove {
+      background: none;
+      border: none;
+      color: var(--brown-mid);
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      padding: 0.35rem 0;
+      margin-top: 0.35rem;
+      font-weight: 500;
+    }
+    .cart-row-remove:hover { color: var(--ink); text-decoration: underline; }
+    .cart-row-qty .qty-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      background: var(--bone);
+      border-radius: 100px;
+      padding: 0.15rem;
+    }
+    .cart-row-qty .qty-btn {
+      background: transparent;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      font-size: 1rem;
+      color: var(--ink);
+      cursor: pointer;
+      transition: background 0.2s var(--ease);
+    }
+    .cart-row-qty .qty-btn:hover { background: rgba(26, 19, 16, 0.08); }
+    .cart-row-qty .qty-display {
+      min-width: 1.75ch;
+      text-align: center;
+      font-family: 'Inter Tight', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--ink);
+    }
+    .cart-row-line {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0;
+      min-width: 5ch;
+      text-align: right;
+    }
+    @media (max-width: 600px) {
+      .cart-row { grid-template-columns: 1fr auto; gap: 0.5rem 1rem; padding: 1.2rem 0; }
+      .cart-row-info { grid-column: 1 / -1; }
+      .cart-row-line { order: 2; }
+      .cart-row-qty { order: 1; }
+      .cart-row-name { font-size: 1.3rem; }
+    }
+
+    .cart-empty {
+      text-align: center;
+      padding: 5rem 0;
+    }
+    .cart-empty-title {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 2rem;
+      color: var(--ink);
+      margin: 0 0 0.6rem;
+      letter-spacing: -0.02em;
+    }
+    .cart-empty-sub {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.95rem;
+      color: var(--brown-mid);
+      margin: 0 0 2rem;
+    }
+
+    .cart-summary-panel {
+      margin-top: 2rem;
+      max-width: 520px;
+      margin-left: auto;
+    }
+    .cart-totals-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 1.25rem 0;
+      border-top: 1px solid rgba(90, 56, 32, 0.2);
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+    .cart-totals-row span:last-child { font-weight: 600; }
+    .cart-pay-info {
+      background: rgba(184, 134, 94, 0.08);
+      border-left: 2px solid var(--cognac);
+      border-radius: 0 10px 10px 0;
+      padding: 1rem 1.2rem;
+      margin-top: 1rem;
+    }
+    .cart-pay-info p {
+      margin: 0;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: var(--brown);
+    }
+    .cart-pay-info-label {
+      font-family: 'Instrument Serif', serif !important;
+      font-style: italic;
+      font-size: 0.95rem !important;
+      color: var(--ink) !important;
+      margin-bottom: 0.35rem !important;
+    }
+
+    .cart-cta {
+      background: var(--ink);
+      color: var(--ivory-lite);
+      padding: 1.25rem 0;
+      flex-shrink: 0;
+      box-shadow: 0 -20px 40px -20px rgba(26, 19, 16, 0.25);
+    }
+    .cart-cta-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .cart-cta-total { display: flex; align-items: baseline; gap: 0.75rem; }
+    .cart-cta-label {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(250, 247, 240, 0.55);
+      margin: 0;
+    }
+    .cart-cta-amount {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.85rem;
+      color: var(--ivory-lite);
+      margin: 0;
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+    .btn-confirm {
+      background: #25D366;
+      color: #ffffff;
+      border: none;
+      border-radius: 100px;
+      padding: 0.95rem 1.6rem;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      transition: background 0.2s var(--ease), transform 0.2s var(--ease);
+      white-space: nowrap;
+    }
+    .btn-confirm:hover { background: #1eb858; transform: translateY(-1px); }
+    @media (max-width: 600px) {
+      .cart-cta-inner { flex-direction: column; align-items: stretch; gap: 0.85rem; }
+      .cart-cta-total { justify-content: space-between; }
+      .btn-confirm { justify-content: center; width: 100%; }
+    }
   </style>
 </head>
 
@@ -1594,12 +1785,13 @@
       <a href="#hero" class="nav-logo">Doughra</a>
       <ul class="nav-links">
         <li><a href="#shop">Bakery</a></li>
-        <li><a href="#bread-school">Loaves</a></li>
+        <li><a href="#bread-school">Loaf Guide</a></li>
         <li><a href="#workshops">Bread School</a></li>
-        <li><a href="#pay">Pay</a></li>
-        <li><a href="#find-us">Find Us</a></li>
       </ul>
-      <a href="#shop" class="btn btn-primary nav-order">Order now</a>
+      <button id="nav-cart" class="nav-cart" onclick="openCart()" aria-label="Open cart">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="nav-cart-count" id="nav-cart-count">0</span>
+      </button>
       <button class="nav-hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -1610,11 +1802,9 @@
 <!-- mobile drawer -->
 <div class="nav-drawer" id="nav-drawer">
   <a href="#shop" onclick="closeDrawer()">Bakery</a>
-  <a href="#bread-school" onclick="closeDrawer()">Loaves</a>
+  <a href="#bread-school" onclick="closeDrawer()">Loaf Guide</a>
   <a href="#workshops" onclick="closeDrawer()">Bread School</a>
-  <a href="#pay" onclick="closeDrawer()">Pay</a>
-  <a href="#find-us" onclick="closeDrawer()">Find Us</a>
-  <a href="#shop" class="btn btn-primary" style="margin-top:0.5rem;text-align:center;" onclick="closeDrawer()">Order now</a>
+  <a href="#" class="btn btn-primary" style="margin-top:0.5rem;text-align:center;" onclick="closeDrawer();openCart();return false;">View cart</a>
 </div>
 
 
@@ -1631,9 +1821,11 @@
       <a href="#bread-school" class="hero-link">Our bread →</a>
     </div>
   </div>
-  <div class="hero-scroll">
-    <div class="hero-scroll-line"></div>
-    <span>Scroll</span>
+  <div class="hero-scroll" aria-hidden="true">
+    <svg width="22" height="28" viewBox="0 0 22 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path class="chev chev-1" d="M4 9 L11 16 L18 9"/>
+      <path class="chev chev-2" d="M4 17 L11 24 L18 17"/>
+    </svg>
   </div>
 </section>
 
@@ -1988,17 +2180,10 @@
     </div><!-- /shop-group starter -->
 
 
-    <!-- ORDER BAR -->
-    <div class="order-bar">
-      <div class="order-bar-info">
-        <p class="order-bar-title">Ready to order?</p>
-        <p class="order-bar-sub">We'll confirm your order and delivery details over WhatsApp.</p>
-        <p id="cart-summary"></p>
-      </div>
-      <a id="wa-order-btn" href="#" class="btn btn-wa" onclick="return handleWAOrder(event)">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Order via WhatsApp
-      </a>
+    <!-- Quick review-cart nudge (the actual order happens on the Cart page) -->
+    <div class="shop-cart-nudge">
+      <p>Done picking?</p>
+      <button class="btn btn-primary" onclick="openCart()">Review cart &amp; confirm →</button>
     </div>
 
   </div>
@@ -2011,10 +2196,10 @@
 <section id="bread-school">
   <div class="container">
     <div class="section-header">
-      <span class="section-label">Know Your Bread</span>
-      <h2>The Loaves</h2>
+      <span class="section-label">Read · Compare · Choose</span>
+      <h2>Find Your Loaf</h2>
       <div class="divider"></div>
-      <p style="color:var(--text-muted);max-width:520px;">Every loaf tells a story. Here's what's actually happening in each one — and why it matters for your body.</p>
+      <p style="color:var(--text-muted);max-width:520px;">A short guide to each loaf — what's in it, why it's good for you, and how to pick the one that suits your week. Take your time.</p>
     </div>
 
     <div class="bread-grid">
@@ -2290,100 +2475,8 @@
 </section>
 
 
-<!-- ═══════════════════════════════════════════════════════════════
-     PAYMENT
-     Flow: customer chats on WhatsApp → we reply with a secure
-     payment link (Apple Pay / Google Pay / card) → they pay from
-     the chat without ever leaving WhatsApp. Keep this section as
-     a plain-English explainer of how payment works.
-════════════════════════════════════════════════════════════════════ -->
-<section id="pay">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-label">Payment</span>
-      <h2>Pay from the chat</h2>
-      <p class="pay-sub">No checkouts, no redirects. Place your order on WhatsApp and we'll send you a secure payment link right in the chat.</p>
-    </div>
-
-    <ol class="pay-steps">
-      <li class="pay-step">
-        <span class="pay-step-num">01</span>
-        <div class="pay-step-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        </div>
-        <h3>Chat your order</h3>
-        <p>Send us your loaves, bakes, and delivery details on WhatsApp. We'll confirm availability and the total.</p>
-      </li>
-
-      <li class="pay-step">
-        <span class="pay-step-num">02</span>
-        <div class="pay-step-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        </div>
-        <h3>We send a secure link</h3>
-        <p>You'll receive a payment link right in the chat — hosted by our payment partner, fully encrypted, reusable if you hesitate.</p>
-      </li>
-
-      <li class="pay-step">
-        <span class="pay-step-num">03</span>
-        <div class="pay-step-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="13" rx="2.5"/><path d="M2 11h20"/><path d="M6 15.5h3"/></svg>
-        </div>
-        <h3>Pay in one tap</h3>
-        <p>Apple Pay, Google Pay, or card — whatever's easiest. Baked fresh the morning of delivery.</p>
-      </li>
-    </ol>
-
-    <div class="pay-cta">
-      <a href="https://wa.me/971500000000?text=Hi%20Doughra%2C%20I%27d%20like%20to%20place%20an%20order" class="btn-whatsapp" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Start an order on WhatsApp
-      </a>
-      <p class="pay-trust">Apple Pay · Google Pay · Card &nbsp;·&nbsp; Secured by our payment partner</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════════
-     FIND US
-════════════════════════════════════════════════════════════════════ -->
-<section id="find-us">
-  <div class="container">
-    <div class="section-header" style="text-align:center;">
-      <span class="section-label" style="display:block;">Order &amp; Connect</span>
-      <h2>Find Us</h2>
-      <div class="divider" style="margin:1.25rem auto;"></div>
-      <p class="find-us-delivery">We deliver across all of Dubai.</p>
-    </div>
-
-    <div class="find-us-links">
-      <!-- Deliveroo -->
-      <a href="#" class="find-us-btn" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4c.829 0 1.5.671 1.5 1.5S12.829 7 12 7s-1.5-.671-1.5-1.5S11.171 4 12 4zm5 9.5c0 2.485-2.015 4.5-4.5 4.5S8 15.985 8 13.5v-3h8v3z"/></svg>
-        Deliveroo
-      </a>
-
-      <!-- Careem -->
-      <a href="#" class="find-us-btn" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
-        Careem
-      </a>
-
-      <!-- WhatsApp -->
-      <a href="https://wa.me/971500000000?text=Hi%20Doughra%2C%20I%27d%20like%20to%20place%20an%20order" class="find-us-btn" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        WhatsApp
-      </a>
-
-      <!-- Instagram -->
-      <a href="https://instagram.com/doughra.ae" class="find-us-btn" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        @doughra.ae
-      </a>
-    </div>
-  </div>
-</section>
+<!-- Pay + Find Us sections removed — payment info now lives in the Cart page,
+     delivery + social links moved to the footer. -->
 
 
 <!-- ═══════════════════════════════════════════════════════════════
@@ -2391,22 +2484,116 @@
 ════════════════════════════════════════════════════════════════════ -->
 <footer>
   <div class="container">
-    <div class="footer-inner">
-      <p class="footer-logo">Doughra</p>
-      <ul class="footer-nav">
-        <li><a href="#shop">Bakery</a></li>
-        <li><a href="#bread-school">Loaves</a></li>
-        <li><a href="#workshops">Bread School</a></li>
-        <li><a href="#pay">Pay</a></li>
-        <li><a href="#find-us">Find Us</a></li>
-      </ul>
-      <p class="footer-handle">
-        <a href="https://instagram.com/doughra.ae" target="_blank" rel="noopener">@doughra.ae</a>
-      </p>
+    <div class="footer-top">
+      <!-- Left: brand -->
+      <div class="footer-brand">
+        <p class="footer-logo">Doughra</p>
+        <p class="footer-tagline">Arab micro bakery · Dubai</p>
+      </div>
+
+      <!-- Middle: nav -->
+      <div class="footer-col">
+        <p class="footer-col-label">Explore</p>
+        <ul class="footer-nav">
+          <li><a href="#shop">Bakery</a></li>
+          <li><a href="#bread-school">Loaf Guide</a></li>
+          <li><a href="#workshops">Bread School</a></li>
+          <li><a href="#" onclick="openCart();return false;">Cart</a></li>
+        </ul>
+      </div>
+
+      <!-- Right: find us -->
+      <div class="footer-col footer-find">
+        <p class="footer-col-label">Find Us</p>
+        <p class="footer-delivery">We deliver across all of Dubai.</p>
+        <div class="footer-channels">
+          <a href="#" class="footer-channel" target="_blank" rel="noopener" aria-label="Deliveroo">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4c.829 0 1.5.671 1.5 1.5S12.829 7 12 7s-1.5-.671-1.5-1.5S11.171 4 12 4zm5 9.5c0 2.485-2.015 4.5-4.5 4.5S8 15.985 8 13.5v-3h8v3z"/></svg>
+            Deliveroo
+          </a>
+          <a href="#" class="footer-channel" target="_blank" rel="noopener" aria-label="Careem">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+            Careem
+          </a>
+          <a href="https://wa.me/971507305023" class="footer-channel" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+          <a href="https://instagram.com/doughra.ae" class="footer-channel" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @doughra.ae
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
       <p class="footer-copy">© 2026 Doughra. All rights reserved. Dubai, UAE.</p>
     </div>
   </div>
 </footer>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CART PAGE (overlay)
+     Shown when the user taps the cart icon in the nav. Presents
+     cart items, a slim payment-info blurb, and a Confirm-via-
+     WhatsApp button that opens wa.me with a pre-filled message
+     (order # + items + total) to +971 50 730 5023.
+════════════════════════════════════════════════════════════════════ -->
+<div id="cart-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+  <div class="cart-page">
+    <header class="cart-header">
+      <div class="container cart-header-inner">
+        <button class="cart-back" onclick="closeCart()" aria-label="Back to site">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <span>Back</span>
+        </button>
+        <p class="cart-title" id="cart-title">Your Cart</p>
+        <button class="cart-close" onclick="closeCart()" aria-label="Close cart">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="cart-body">
+      <div class="container">
+        <div id="cart-items" class="cart-items" hidden></div>
+
+        <div id="cart-empty" class="cart-empty">
+          <p class="cart-empty-title">Your cart is empty.</p>
+          <p class="cart-empty-sub">Add a loaf or a bake to get started.</p>
+          <button class="btn btn-primary" onclick="closeCart()">Browse the bakery</button>
+        </div>
+
+        <div id="cart-summary-panel" class="cart-summary-panel" hidden>
+          <div class="cart-totals-row">
+            <span>Subtotal</span>
+            <span id="cart-subtotal">0 AED</span>
+          </div>
+
+          <div class="cart-pay-info">
+            <p class="cart-pay-info-label">How you'll pay</p>
+            <p>Once you confirm, we'll reply on WhatsApp with your items and total, then send a secure payment link in the chat — tap to pay with Apple Pay, Google Pay, or card.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="cart-cta" id="cart-cta" hidden>
+      <div class="container cart-cta-inner">
+        <div class="cart-cta-total">
+          <p class="cart-cta-label">Total</p>
+          <p class="cart-cta-amount" id="cart-cta-amount">0 AED</p>
+        </div>
+        <button class="btn-confirm" onclick="confirmOrder()">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Confirm via WhatsApp
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>
 
 
 <!-- ═══════════════════════════════════════════════════════════════
@@ -2463,7 +2650,8 @@
     if (cart[id] && cart[id].qty > 0) {
       cart[id].unitPrice = Number(val);
       cart[id].size = getSizeLabel(id);
-      updateSummary();
+      updateCartBadge();
+      if (document.body.classList.contains('cart-open')) renderCart();
     }
   }
 
@@ -2472,6 +2660,9 @@
     if (!el) return null;
     return el.value === '24' ? 'Regular' : 'Large';
   }
+
+  // ─── WHATSAPP ────────────────────────────────────────────────
+  const WA_NUMBER = '971507305023'; // +971 50 730 5023
 
   function changeQty(id, delta) {
     const current = cart[id] ? cart[id].qty : 0;
@@ -2499,52 +2690,114 @@
       cart[id] = { name: p.name, size, qty: newQty, unitPrice };
     }
 
-    updateSummary();
+    updateCartBadge();
+    if (document.body.classList.contains('cart-open')) renderCart();
   }
 
-  function updateSummary() {
-    const items  = Object.values(cart).filter(i => i.qty > 0);
-    const total  = items.reduce((s, i) => s + i.qty * i.unitPrice, 0);
-    const summEl = document.getElementById('cart-summary');
+  function setQty(id, qty) {
+    const current = cart[id] ? cart[id].qty : 0;
+    changeQty(id, qty - current);
+  }
 
-    if (items.length === 0) {
-      summEl.textContent = '';
-    } else {
-      const count = items.reduce((s, i) => s + i.qty, 0);
-      summEl.textContent = `${count} item${count !== 1 ? 's' : ''} · ${total} AED`;
+  // ─── NAV CART BADGE ──────────────────────────────────────────
+  function updateCartBadge() {
+    const count = Object.values(cart).reduce((s, i) => s + i.qty, 0);
+    const countEl = document.getElementById('nav-cart-count');
+    if (countEl) countEl.textContent = count;
+  }
+
+  // ─── CART PAGE (overlay) ─────────────────────────────────────
+  function openCart() {
+    document.body.classList.add('cart-open');
+    document.getElementById('cart-overlay').setAttribute('aria-hidden', 'false');
+    renderCart();
+  }
+
+  function closeCart() {
+    document.body.classList.remove('cart-open');
+    document.getElementById('cart-overlay').setAttribute('aria-hidden', 'true');
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('cart-open')) closeCart();
+  });
+
+  function renderCart() {
+    const itemsEl   = document.getElementById('cart-items');
+    const emptyEl   = document.getElementById('cart-empty');
+    const summaryEl = document.getElementById('cart-summary-panel');
+    const ctaEl     = document.getElementById('cart-cta');
+    const subEl     = document.getElementById('cart-subtotal');
+    const totalEl   = document.getElementById('cart-cta-amount');
+
+    const entries = Object.entries(cart).filter(([, i]) => i.qty > 0);
+
+    if (entries.length === 0) {
+      itemsEl.hidden    = true;
+      emptyEl.hidden    = false;
+      summaryEl.hidden  = true;
+      ctaEl.hidden      = true;
+      return;
     }
+
+    itemsEl.hidden   = false;
+    emptyEl.hidden   = true;
+    summaryEl.hidden = false;
+    ctaEl.hidden     = false;
+
+    itemsEl.innerHTML = entries.map(([id, i]) => `
+      <div class="cart-row" data-row="${id}">
+        <div class="cart-row-info">
+          <p class="cart-row-name">${i.name}</p>
+          <p class="cart-row-meta">${i.size ? i.size + ' · ' : ''}${i.unitPrice} AED each</p>
+          <button class="cart-row-remove" onclick="setQty('${id}', 0)">Remove</button>
+        </div>
+        <div class="cart-row-qty">
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('${id}', -1)" aria-label="Decrease">−</button>
+            <span class="qty-display">${i.qty}</span>
+            <button class="qty-btn" onclick="changeQty('${id}', 1)" aria-label="Increase">+</button>
+          </div>
+        </div>
+        <p class="cart-row-line">${i.qty * i.unitPrice} AED</p>
+      </div>
+    `).join('');
+
+    const total = entries.reduce((s, [, i]) => s + i.qty * i.unitPrice, 0);
+    subEl.textContent   = total + ' AED';
+    totalEl.textContent = total + ' AED';
   }
 
-  function buildWhatsAppURL() {
-    const items = Object.values(cart).filter(i => i.qty > 0);
-    if (items.length === 0) return null;
+  // ─── ORDER NUMBER ────────────────────────────────────────────
+  function generateOrderNumber() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no I/O/0/1 for readability
+    let s = '';
+    for (let i = 0; i < 5; i++) s += chars[Math.floor(Math.random() * chars.length)];
+    return 'D-' + s;
+  }
 
-    const lines = items.map(i =>
+  // ─── CONFIRM ORDER → WHATSAPP ────────────────────────────────
+  function confirmOrder() {
+    const entries = Object.entries(cart).filter(([, i]) => i.qty > 0);
+    if (entries.length === 0) return;
+
+    const orderNum = generateOrderNumber();
+    const lines = entries.map(([, i]) =>
       `• ${i.name}${i.size ? ' (' + i.size + ')' : ''} ×${i.qty} — ${i.qty * i.unitPrice} AED`
     );
-    const total = items.reduce((s, i) => s + i.qty * i.unitPrice, 0);
-    const msg   = `Hi Doughra! I'd like to place an order:\n\n${lines.join('\n')}\n\nTotal: ${total} AED\n\nThank you!`;
-    return `https://wa.me/971500000000?text=${encodeURIComponent(msg)}`;
+    const total = entries.reduce((s, [, i]) => s + i.qty * i.unitPrice, 0);
+    const msg =
+      `Hi Doughra!\n\n` +
+      `Order ${orderNum}\n\n` +
+      `${lines.join('\n')}\n\n` +
+      `Subtotal: ${total} AED\n\n` +
+      `Ready for the payment link whenever you are. Thanks!`;
+    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
   }
 
-  function handleWAOrder(e) {
-    const url = buildWhatsAppURL();
-    if (!url) {
-      e.preventDefault();
-      alert('Please add at least one item to your order.');
-      return false;
-    }
-    document.getElementById('wa-order-btn').href = url;
-    return true;
-  }
-
-  // ─── PAYMENT ─────────────────────────────────────────────────
-  // No on-site payment flow. We send a payment link in the WhatsApp
-  // chat (Apple Pay / Google Pay / card). The #pay section on the
-  // page is purely an explainer — see the markup above. To enable
-  // payment links, configure a payment processor (e.g. Tap Payments
-  // "Pay by Link", Stripe Payment Links, PayMob) and paste the
-  // generated link into the WhatsApp chat with the customer.
+  // initial badge render
+  updateCartBadge();
 
 
   // ─── SCROLL-REVEAL ───────────────────────────────────────────
