@@ -1,5 +1,8 @@
 # Doughra — Project Instructions
 
+## Live URL
+https://doughra.vercel.app
+
 ## What This Is
 Single-page marketing + menu site for Doughra, a Dubai-based Arab micro bakery. Static HTML/CSS/JS — no framework, no build step.
 
