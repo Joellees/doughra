@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doughra — Baked with Obsession</title>
+  <meta name="description" content="Dubai-based micro bakery specialising in artisan sourdough. Order online via WhatsApp." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── DESIGN TOKENS ────────────────────────────────────────── */
+    :root {
+      --bg:          #0A0A0A;
+      --surface:     #141414;
+      --surface-2:   #1C1C1C;
+      --gold:        #C9A96E;
+      --gold-dim:    #9C7D4F;
+      --gold-subtle: #C9A96E18;
+      --text:        #F0EBE1;
+      --text-muted:  #7A7068;
+      --border:      #2A2520;
+      --radius:      6px;
+      --nav-h:       68px;
+    }
+
+    /* ─── TYPOGRAPHY ────────────────────────────────────────────── */
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.1; }
+    h2 { font-size: clamp(2rem, 5vw, 3.25rem); }
+    h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
+    p  { font-size: clamp(0.875rem, 1.5vw, 1rem); }
+
+    /* ─── UTILITIES ─────────────────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3rem); }
+    .section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.2em 0.65em;
+    }
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 1.25rem 0;
+    }
+
+    /* ─── BUTTONS ───────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      padding: 0.875rem 1.75rem;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: #0A0A0A;
+    }
+    .btn-primary:hover { background: #dbbf85; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+    .btn-wa {
+      background: #25D366;
+      color: #fff;
+      gap: 0.6rem;
+    }
+    .btn-wa:hover { background: #1fb855; transform: translateY(-1px); }
+    .btn-wa svg { flex-shrink: 0; }
+
+    /* ─── NAV ───────────────────────────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      transition: background 0.3s ease, box-shadow 0.3s ease, height 0.3s ease;
+    }
+    #nav.scrolled {
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--border);
+      height: 56px;
+      --nav-h: 56px;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-order { margin-left: 1.5rem; }
+
+    /* hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text);
+      transition: all 0.25s ease;
+      transform-origin: center;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .nav-drawer {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0;
+      background: rgba(10,10,10,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 1.5rem 2rem;
+      z-index: 99;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .nav-drawer.open { display: flex; }
+    .nav-drawer a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-drawer a:hover { color: var(--gold); }
+
+    /* ─── HERO ──────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: var(--nav-h);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      opacity: 0.07;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23C9A96E' stroke-width='0.6'%3E%3Cpolygon points='40,4 76,22 76,58 40,76 4,58 4,22'/%3E%3Cpolygon points='40,14 66,27 66,53 40,66 14,53 14,27'/%3E%3Cline x1='40' y1='4' x2='40' y2='14'/%3E%3Cline x1='76' y1='22' x2='66' y2='27'/%3E%3Cline x1='76' y1='58' x2='66' y2='53'/%3E%3Cline x1='40' y1='76' x2='40' y2='66'/%3E%3Cline x1='4' y1='58' x2='14' y2='53'/%3E%3Cline x1='4' y1='22' x2='14' y2='27'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: 80px 80px;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(201,169,110,0.08) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      padding: 0 1.5rem;
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .hero-wordmark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(5rem, 18vw, 11rem);
+      font-weight: 600;
+      font-style: italic;
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 1.75rem;
+    }
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      font-style: italic;
+    }
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .hero-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .hero-link:hover { color: var(--gold); border-color: var(--gold); }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* ─── SECTION COMMONS ───────────────────────────────────────── */
+    section { padding: clamp(5rem, 10vw, 8rem) 0; }
+    section:nth-child(even) { background: var(--surface); }
+    .section-header { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+
+    /* ─── SHOP ──────────────────────────────────────────────────── */
+    #shop { background: var(--bg); }
+    .shop-group { margin-bottom: 4rem; }
+    .shop-group:last-of-type { margin-bottom: 0; }
+    .shop-group-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+    .product-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
+    .product-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-img svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .product-img .emoji { position: relative; z-index: 1; }
+    .product-body {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      flex: 1;
+    }
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .product-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .product-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .product-controls {
+      margin-top: auto;
+      padding-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .product-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--gold);
+    }
+    .size-select {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: var(--radius);
+      padding: 0.4rem 0.6rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237A7068' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.5rem center;
+      padding-right: 1.6rem;
+    }
+    .size-select:focus { outline: none; border-color: var(--gold); }
+    .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .qty-btn {
+      background: var(--surface-2);
+      border: none;
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .qty-btn:hover { background: var(--gold-subtle); color: var(--gold); }
+    .qty-display {
+      width: 32px;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--surface-2);
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    /* Starter kit special card */
+    .card-made-to-order {
+      background: var(--gold-subtle);
+      border: 1px solid var(--gold-dim);
+      border-radius: var(--radius);
+      padding: 0.65rem 0.85rem;
+      font-size: 0.75rem;
+      color: var(--gold);
+      margin-top: 0.25rem;
+    }
+
+    /* WhatsApp order bar */
+    .order-bar {
+      margin-top: 3.5rem;
+      padding: 1.75rem 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .order-bar-info { flex: 1; min-width: 200px; }
+    .order-bar-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .order-bar-sub { font-size: 0.78rem; color: var(--text-muted); }
+    #cart-summary {
+      font-size: 0.78rem;
+      color: var(--gold);
+      margin-top: 0.4rem;
+      min-height: 1.1em;
+    }
+
+    /* ─── BREAD SCHOOL ──────────────────────────────────────────── */
+    #bread-school { background: var(--surface); }
+    .bread-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .bread-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.75rem 1.5rem;
+      transition: border-color 0.25s;
+    }
+    .bread-card:hover { border-color: var(--gold-dim); }
+    .bread-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .bread-benefits { list-style: none; margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.55rem; }
+    .bread-benefits li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .bread-benefits li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin-top: 0.45em;
+      flex-shrink: 0;
+    }
+    .bread-fun-fact {
+      font-size: 0.75rem;
+      font-style: italic;
+      color: var(--text-muted);
+      border-left: 2px solid var(--gold-dim);
+      padding-left: 0.75rem;
+      line-height: 1.55;
+    }
+    .bread-fun-fact strong { color: var(--gold); font-style: normal; }
+
+    /* ─── WORKSHOPS ─────────────────────────────────────────────── */
+    #workshops { background: var(--bg); }
+    .workshop-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 4rem;
+    }
+    .workshop-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .workshop-card:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
+    .workshop-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .workshop-img svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .workshop-img .emoji { position: relative; z-index: 1; }
+    .workshop-body { padding: 1.5rem; }
+    .workshop-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .workshop-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
+    .workshop-meta {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    .workshop-meta span { display: flex; align-items: center; gap: 0.3rem; }
+
+    /* Interest form */
+    .workshop-form-wrap {
+      max-width: 640px;
+      margin: 0 auto 4rem;
+    }
+    .form-sub-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .form-sub-header h3 { margin-bottom: 0.5rem; }
+    .form-sub-header p { font-size: 0.85rem; color: var(--text-muted); }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: var(--radius);
+      padding: 0.75rem 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .form-field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237A7068' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      padding-right: 2rem;
+    }
+    .form-field select option { background: var(--surface-2); }
+    .form-field textarea { resize: vertical; min-height: 100px; }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus { outline: none; border-color: var(--gold); }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: var(--text-muted); }
+    .form-submit { margin-top: 0.5rem; }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(201,169,110,0.08);
+      border: 1px solid var(--gold-dim);
+      border-radius: var(--radius);
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+    }
+
+    /* Map */
+    .map-wrap {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      height: 380px;
+    }
+    .map-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+
+    /* ─── FIND US ───────────────────────────────────────────────── */
+    #find-us { background: var(--surface); text-align: center; }
+    .find-us-delivery {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+    .find-us-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .find-us-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.8rem 1.4rem;
+      transition: border-color 0.25s, color 0.25s, transform 0.2s;
+    }
+    .find-us-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+    .find-us-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    /* ─── FOOTER ────────────────────────────────────────────────── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 3rem 0 2rem;
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.75rem;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--text);
+      letter-spacing: 0.04em;
+    }
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .footer-nav a {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: var(--gold); }
+    .footer-handle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .footer-handle a { color: var(--gold); text-decoration: none; }
+    .footer-copy {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      opacity: 0.5;
+    }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .nav-links, .nav-order { display: none; }
+      .nav-hamburger { display: flex; }
+      .bread-grid { grid-template-columns: repeat(2, 1fr); }
+      .workshop-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .bread-grid { grid-template-columns: 1fr; }
+      .workshop-grid { grid-template-columns: 1fr; }
+      .order-bar { flex-direction: column; align-items: flex-start; }
+      .product-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAV
+════════════════════════════════════════════════════════════════════ -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">Doughra</a>
+      <ul class="nav-links">
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#bread-school">Bread School</a></li>
+        <li><a href="#workshops">Workshops</a></li>
+        <li><a href="#find-us">Find Us</a></li>
+      </ul>
+      <a href="#shop" class="btn btn-primary nav-order">Order now</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- mobile drawer -->
+<div class="nav-drawer" id="nav-drawer">
+  <a href="#shop" onclick="closeDrawer()">Shop</a>
+  <a href="#bread-school" onclick="closeDrawer()">Bread School</a>
+  <a href="#workshops" onclick="closeDrawer()">Workshops</a>
+  <a href="#find-us" onclick="closeDrawer()">Find Us</a>
+  <a href="#shop" class="btn btn-primary" style="margin-top:0.5rem;text-align:center;" onclick="closeDrawer()">Order now</a>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Dubai · Est. 2024</p>
+    <h1 class="hero-wordmark">Doughra</h1>
+    <p class="hero-tagline">Baked with obsession. Eaten with joy.</p>
+    <div class="hero-ctas">
+      <a href="#shop" class="btn btn-primary">Order now</a>
+      <a href="#bread-school" class="hero-link">Our bread →</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SHOP
+════════════════════════════════════════════════════════════════════ -->
+<section id="shop">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">The Menu</span>
+      <h2>Shop</h2>
+      <div class="divider"></div>
+      <p style="color:var(--text-muted);max-width:520px;">Handcrafted in small batches. Add what you want, then send us your order on WhatsApp — we'll take it from there.</p>
+    </div>
+
+    <!-- SOURDOUGH LOAVES -->
+    <div class="shop-group">
+      <p class="shop-group-label">Sourdough Loaves</p>
+      <div class="product-grid">
+
+        <!-- The Classic -->
+        <div class="product-card">
+          <div class="product-img">
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#1A1410"/><ellipse cx="200" cy="170" rx="130" ry="80" fill="#6B4226"/><ellipse cx="200" cy="155" rx="120" ry="70" fill="#8B5E3C"/><path d="M120,155 Q200,100 280,155" stroke="#C9A96E" stroke-width="1.5" fill="none" opacity="0.5"/><ellipse cx="200" cy="145" rx="60" ry="18" fill="#A0714F" opacity="0.6"/></svg>
+            <span class="emoji">🍞</span>
+          </div>
+          <div class="product-body">
+            <p class="product-name">The Classic</p>
+            <p class="product-desc">Classic sourdough — long fermented, naturally leavened.</p>
+            <div class="product-tags"><span class="tag">vegan</span><span class="tag">gut-friendly</span></div>
+            <div class="product-controls">
+              <div>
+                <select class="size-select" id="size-classic" onchange="syncPrice('classic',this.value)">
+                  <option value="24">Regular — 24 AED</option>
+                  <option value="32">Large — 32 AED</option>
+                </select>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.75rem;">
+                <p class="product-price" id="price-classic">24 AED</p>
+                <div class="qty-control">
+                  <button class="qty-btn" onclick="changeQty('classic',-1)">−</button>
+                  <span class="qty-display" id="qty-classic">0</span>
+                  <button class="qty-btn" onclick="changeQty('classic',1)">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Rye -->
+        <div class="product-card">
+          <div class="product-img">
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#131210"/><ellipse cx="200" cy="170" rx="130" ry="80" fill="#3D2B1F"/><ellipse cx="200" cy="155" rx="120" ry="70" fill="#5C4033"/><path d="M120,155 Q200,100 280,155" stroke="#8B6347" stroke-width="1.5" fill="none" opacity="0.5"/><ellipse cx="200" cy="145" rx="60" ry="18" fill="#7A5240" opacity="0.6"/></svg>
+            <span class="emoji">🌾</span>
+          </div>
+          <div class="product-body">
+            <p class="product-name">The Rye</p>
+            <p class="product-desc">Dark rye sourdough with deep, earthy flavour.</p>
+            <div class="product-tags"><span class="tag">high-fibre</span><span class="tag">gut-friendly</span></div>
+            <div class="product-controls">
+              <div>
+                <select class="size-select" id="size-rye" onchange="syncPrice('rye',this.value)">
+                  <option value="24">Regular — 24 AED</option>
+                  <option value="32">Large — 32 AED</option>
+                </select>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.75rem;">
+                <p class="product-price" id="price-rye">24 AED</p>
+                <div class="qty-control">
+                  <button class="qty-btn" onclick="changeQty('rye',-1)">−</button>
+                  <span class="qty-display" id="qty-rye">0</span>
+                  <button class="qty-btn" onclick="changeQty('rye',1)">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Protein -->
+        <div class="product-card">
+          <div class="product-img">
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#141516"/><ellipse cx="200" cy="170" rx="130" ry="80" fill="#4A5568"/><ellipse cx="200" cy="155" rx="120" ry="70" fill="#718096"/><path d="M120,155 Q200,100 280,155" stroke="#C9A96E" stroke-width="1.5" fill="none" opacity="0.5"/><ellipse cx="200" cy="145" rx="60" ry="18" fill="#A0AEC0" opacity="0.6"/></svg>
+            <span class="emoji">💪</span>
+          </div>
+          <div class="product-body">
+            <p class="product-name">The Protein</p>
+            <p class="product-desc">High-protein sourdough — macro-conscious, satisfying.</p>
+            <div class="product-tags"><span class="tag">high protein</span></div>
+            <div class="product-controls">
+              <div>
+                <select class="size-select" id="size-protein" onchange="syncPrice('protein',this.value)">
+                  <option value="24">Regular — 24 AED</option>
+                  <option value="32">Large — 32 AED</option>
+                </select>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.75rem;">
+                <p class="product-price" id="price-protein">24 AED</p>
+                <div class="qty-control">
+                  <button class="qty-btn" onclick="changeQty('protein',-1)">−</button>
+                  <span class="qty-display" id="qty-protein">0</span>
+                  <button class="qty-btn" onclick="changeQty('protein',1)">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Manoushe -->
+        <div class="product-card">
+          <div class="product-img">
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#16130D"/><ellipse cx="200" cy="170" rx="130" ry="80" fill="#5A4A1A"/><ellipse cx="200" cy="155" rx="120" ry="70" fill="#7A6828"/><path d="M120,155 Q200,100 280,155" stroke="#C9A96E" stroke-width="2" fill="none" opacity="0.6"/><circle cx="170" cy="150" r="8" fill="#3D6B1F" opacity="0.7"/><circle cx="200" cy="140" r="6" fill="#3D6B1F" opacity="0.7"/><circle cx="230" cy="150" r="8" fill="#3D6B1F" opacity="0.7"/></svg>
+            <span class="emoji">🌿</span>
+          </div>
+          <div class="product-body">
+            <p class="product-name">The Manoushe</p>
+            <p class="product-desc">Za'atar sourdough — a Lebanese classic, reimagined.</p>
+            <div class="product-tags"><span class="tag">Lebanese classic</span></div>
+            <div class="product-controls">
+              <div>
+                <select class="size-select" id="size-manoushe" onchange="syncPrice('manoushe',this.value)">
+                  <option value="24">Regular — 24 AED</option>
+                  <option value="32">Large — 32 AED</option>
+                </select>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.75rem;">
+                <p class="product-price" id="price-manoushe">24 AED</p>
+                <div class="qty-control">
+                  <button class="qty-btn" onclick="changeQty('manoushe',-1)">−</button>
+                  <span class="qty-display" id="qty-manoushe">0</span>
+                  <button class="qty-btn" onclick="changeQty('manoushe',1)">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Spicy One -->
+        <div class="product-card">
+          <div class="product-img">
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#160A0A"/><ellipse cx="200" cy="170" rx="130" ry="80" fill="#7B1F1F"/><ellipse cx="200" cy="155" rx="120" ry="70" fill="#A33030"/><path d="M120,155 Q200,100 280,155" stroke="#F4A460" stroke-width="1.5" fill="none" opacity="0.5"/><ellipse cx="200" cy="145" rx="60" ry="18" fill="#CC4444" opacity="0.6"/></svg>
+            <span class="emoji">🌶️</span>
+          </div>
+          <div class="product-body">
+            <p class="product-name">The Spicy One</p>
+            <p class="product-desc">Jalapeño &amp; cheddar sourdough — bold, unapologetic.</p>
+            <div class="product-tags"><span class="tag">spicy</span><span class="tag">bold</span></div>
+            <div class="product-controls">
+              <div>
+                <select class="size-select" id="size-spicy" onchange="syncPrice('spicy',this.value)">
+                  <option value="24">Regular — 24 AED</option>
+                  <option value="32">Large — 32 AED</option>
+                </select>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.75rem;">
+                <p class="product-price" id="price-spicy">24 AED</p>
+                <div class="qty-control">
+                  <button class="qty-btn" onclick="changeQty('spicy',-1)">−</button>
+                  <span class="qty-display" id="qty-spicy">0</span>
+                  <button class="qty-btn" onclick="changeQty('spicy',1)">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Sweet One -->
+        <div class="product-card">
+          <div class="product-img">
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#14100A"/><ellipse cx="200" cy="170" rx="130" ry="80" fill="#7A5C1E"/><ellipse cx="200" cy="155" rx="120" ry="70" fill="#A07A30"/><path d="M120,155 Q200,100 280,155" stroke="#F5DEB3" stroke-width="1.5" fill="none" opacity="0.5"/><circle cx="185" cy="145" r="12" fill="#F5F5DC" opacity="0.5"/><circle cx="215" cy="148" r="10" fill="#DAA520" opacity="0.4"/></svg>
+            <span class="emoji">🍯</span>
+          </div>
+          <div class="product-body">
+            <p class="product-name">The Sweet One</p>
+            <p class="product-desc">Goat cheese &amp; honey sourdough — sweet-savoury harmony.</p>
+            <div class="product-tags"><span class="tag">sweet-savoury</span></div>
+            <div class="product-controls">
+              <div>
+                <select class="size-select" id="size-sweet" onchange="syncPrice('sweet',this.value)">
+                  <option value="24">Regular — 24 AED</option>
+                  <option value="32">Large — 32 AED</option>
+                </select>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.75rem;">
+                <p class="product-price" id="price-sweet">24 AED</p>
+                <div class="qty-control">
+                  <button class="qty-btn" onclick="changeQty('sweet',-1)">−</button>
+                  <span class="qty-display" id="qty-sweet">0</span>
+                  <button class="qty-btn" onclick="changeQty('sweet',1)">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /product-grid loaves -->
+    </div><!-- /shop-group loaves -->
+
+
+    <!-- BAKES & SWEETS -->
+    <div class="shop-group">
+      <p class="shop-group-label">Bakes &amp; Sweets</p>
+      <div class="product-grid">
+
+        <!-- Za'atar Bombs -->
+        <div class="product-card">
+          <div class="product-img">
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#141008"/><circle cx="145" cy="160" r="40" fill="#7A6828"/><circle cx="200" cy="145" r="45" fill="#8B7730"/><circle cx="255" cy="160" r="40" fill="#7A6828"/><circle cx="172" cy="185" r="35" fill="#6B5822"/><circle cx="228" cy="185" r="35" fill="#6B5822"/></svg>
+            <span class="emoji">🌿</span>
+          </div>
+          <div class="product-body">
+            <p class="product-name">Za'atar Bombs</p>
+            <p class="product-desc">15 za'atar bread balls — perfect for sharing.</p>
+            <div class="product-tags"><span class="tag">Lebanese</span><span class="tag">shareable</span></div>
+            <div class="product-controls">
+              <p class="product-price">20 AED</p>
+              <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('zaatar',-1)">−</button>
+                <span class="qty-display" id="qty-zaatar">0</span>
+                <button class="qty-btn" onclick="changeQty('zaatar',1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chocolate Bombs -->
+        <div class="product-card">
+          <div class="product-img">
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#0D0808"/><circle cx="145" cy="160" r="40" fill="#3D1F0A"/><circle cx="200" cy="145" r="45" fill="#5C2E10"/><circle cx="255" cy="160" r="40" fill="#3D1F0A"/><circle cx="172" cy="185" r="35" fill="#2E1508"/><circle cx="228" cy="185" r="35" fill="#2E1508"/></svg>
+            <span class="emoji">🍫</span>
+          </div>
+          <div class="product-body">
+            <p class="product-name">Chocolate Bombs</p>
+            <p class="product-desc">15 chocolate bread balls — indulgently soft.</p>
+            <div class="product-tags"><span class="tag">indulgent</span></div>
+            <div class="product-controls">
+              <p class="product-price">20 AED</p>
+              <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('chocbombs',-1)">−</button>
+                <span class="qty-display" id="qty-chocbombs">0</span>
+                <button class="qty-btn" onclick="changeQty('chocbombs',1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Brownie -->
+        <div class="product-card">
+          <div class="product-img">
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#0D0808"/><rect x="120" y="100" width="160" height="130" rx="6" fill="#3D1F0A"/><rect x="130" y="110" width="140" height="110" rx="4" fill="#5C2E10"/><line x1="200" y1="110" x2="200" y2="220" stroke="#3D1F0A" stroke-width="2"/><line x1="130" y1="165" x2="270" y2="165" stroke="#3D1F0A" stroke-width="2"/></svg>
+            <span class="emoji">🍫</span>
+          </div>
+          <div class="product-body">
+            <p class="product-name">The Brownie</p>
+            <p class="product-desc">Box of rich, fudgy brownies.</p>
+            <div class="product-tags"><span class="tag">indulgent</span></div>
+            <div class="product-controls">
+              <p class="product-price">40 AED</p>
+              <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('brownie',-1)">−</button>
+                <span class="qty-display" id="qty-brownie">0</span>
+                <button class="qty-btn" onclick="changeQty('brownie',1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Healthy Brownie -->
+        <div class="product-card">
+          <div class="product-img">
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#0A0D08"/><rect x="120" y="100" width="160" height="130" rx="6" fill="#1F3D1F"/><rect x="130" y="110" width="140" height="110" rx="4" fill="#2E5C2E"/><line x1="200" y1="110" x2="200" y2="220" stroke="#1F3D1F" stroke-width="2"/><line x1="130" y1="165" x2="270" y2="165" stroke="#1F3D1F" stroke-width="2"/></svg>
+            <span class="emoji">🥗</span>
+          </div>
+          <div class="product-body">
+            <p class="product-name">The Healthy Brownie</p>
+            <p class="product-desc">Box of high-protein, lower-sugar brownies.</p>
+            <div class="product-tags"><span class="tag">high protein</span><span class="tag">lower sugar</span></div>
+            <div class="product-controls">
+              <p class="product-price">55 AED</p>
+              <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('healthybrownie',-1)">−</button>
+                <span class="qty-display" id="qty-healthybrownie">0</span>
+                <button class="qty-btn" onclick="changeQty('healthybrownie',1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /product-grid sweets -->
+    </div><!-- /shop-group sweets -->
+
+
+    <!-- STARTER KIT -->
+    <div class="shop-group">
+      <p class="shop-group-label">Starter Kit</p>
+      <div class="product-grid" style="max-width:320px;">
+        <div class="product-card">
+          <div class="product-img">
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#0D0E10"/><rect x="155" y="80" width="90" height="140" rx="8" fill="#2A2520"/><rect x="163" y="88" width="74" height="124" rx="5" fill="#3A3028"/><rect x="170" y="96" width="60" height="20" rx="3" fill="#C9A96E" opacity="0.3"/><circle cx="200" cy="160" r="25" fill="#C9A96E" opacity="0.15"/><circle cx="200" cy="160" r="15" fill="#C9A96E" opacity="0.25"/><text x="200" y="165" text-anchor="middle" fill="#C9A96E" font-size="12" font-family="serif" opacity="0.8">starter</text></svg>
+            <span class="emoji">🫙</span>
+          </div>
+          <div class="product-body">
+            <p class="product-name">The Starter Kit</p>
+            <p class="product-desc">Live sourdough starter, care instructions &amp; extras — everything you need to begin.</p>
+            <div class="card-made-to-order">Made to order — contact us for availability.</div>
+            <div class="product-controls" style="margin-top:1rem;">
+              <p class="product-price">Price TBD</p>
+              <a href="https://wa.me/971500000000?text=Hi%20Doughra!%20I'm%20interested%20in%20The%20Starter%20Kit.%20Could%20you%20share%20more%20details%20and%20availability%3F" target="_blank" class="btn btn-wa" style="padding:0.6rem 1rem;font-size:0.72rem;">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp us
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /shop-group starter -->
+
+
+    <!-- ORDER BAR -->
+    <div class="order-bar">
+      <div class="order-bar-info">
+        <p class="order-bar-title">Ready to order?</p>
+        <p class="order-bar-sub">We'll confirm your order and delivery details over WhatsApp.</p>
+        <p id="cart-summary"></p>
+      </div>
+      <a id="wa-order-btn" href="#" class="btn btn-wa" onclick="return handleWAOrder(event)">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Order via WhatsApp
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BREAD SCHOOL
+════════════════════════════════════════════════════════════════════ -->
+<section id="bread-school">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Know Your Bread</span>
+      <h2>Bread School</h2>
+      <div class="divider"></div>
+      <p style="color:var(--text-muted);max-width:520px;">Every loaf tells a story. Here's what's actually happening in each one — and why it matters for your body.</p>
+    </div>
+
+    <div class="bread-grid">
+
+      <!-- The Classic -->
+      <div class="bread-card">
+        <p class="bread-card-name">The Classic</p>
+        <ul class="bread-benefits">
+          <li>Long fermentation = easier digestion</li>
+          <li>Lower glycaemic index than regular bread</li>
+          <li>Natural probiotics from wild yeast</li>
+        </ul>
+        <p class="bread-fun-fact"><strong>Did you know?</strong> The long fermentation process breaks down gluten proteins, making sourdough easier to digest even for some gluten-sensitive people.</p>
+      </div>
+
+      <!-- The Rye -->
+      <div class="bread-card">
+        <p class="bread-card-name">The Rye</p>
+        <ul class="bread-benefits">
+          <li>High fibre content — keeps you full longer</li>
+          <li>Supports gut microbiome diversity</li>
+          <li>Lower insulin response than wheat bread</li>
+        </ul>
+        <p class="bread-fun-fact"><strong>Did you know?</strong> Rye contains a unique type of fibre called arabinoxylan that feeds beneficial gut bacteria more effectively than most other grains.</p>
+      </div>
+
+      <!-- The Protein -->
+      <div class="bread-card">
+        <p class="bread-card-name">The Protein</p>
+        <ul class="bread-benefits">
+          <li>Macro-friendly — fits any training diet</li>
+          <li>Supports muscle recovery post-workout</li>
+          <li>Satiating — fewer cravings throughout the day</li>
+        </ul>
+        <p class="bread-fun-fact"><strong>Did you know?</strong> Higher protein content per slice means you get the carb satisfaction of bread while staying closer to your macros — no compromises.</p>
+      </div>
+
+      <!-- The Manoushe -->
+      <div class="bread-card">
+        <p class="bread-card-name">The Manoushe</p>
+        <ul class="bread-benefits">
+          <li>Za'atar is rich in antioxidants &amp; thymol</li>
+          <li>Olive oil provides heart-healthy monounsaturated fats</li>
+          <li>Centuries of Lebanese culinary heritage</li>
+        </ul>
+        <p class="bread-fun-fact"><strong>Did you know?</strong> Za'atar has been used in the Levant for over 2,000 years — not just for flavour, but as a natural antimicrobial and brain booster.</p>
+      </div>
+
+      <!-- The Spicy One -->
+      <div class="bread-card">
+        <p class="bread-card-name">The Spicy One</p>
+        <ul class="bread-benefits">
+          <li>Capsaicin gives a natural metabolism boost</li>
+          <li>Cheddar adds calcium and protein</li>
+          <li>Bold comfort food — elevated</li>
+        </ul>
+        <p class="bread-fun-fact"><strong>Did you know?</strong> Capsaicin — the compound that makes jalapeños hot — has been shown to temporarily increase metabolic rate by up to 8%.</p>
+      </div>
+
+      <!-- The Sweet One -->
+      <div class="bread-card">
+        <p class="bread-card-name">The Sweet One</p>
+        <ul class="bread-benefits">
+          <li>Goat cheese is easier to digest than cow dairy</li>
+          <li>Honey is a natural sweetener with antimicrobial properties</li>
+          <li>Perfectly balanced sweet-savoury contrast</li>
+        </ul>
+        <p class="bread-fun-fact"><strong>Did you know?</strong> Goat milk is naturally homogenised, forming smaller fat globules than cow milk — which makes it gentler on the digestive system.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     WORKSHOPS
+════════════════════════════════════════════════════════════════════ -->
+<section id="workshops">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Learn to Bake</span>
+      <h2>Workshops</h2>
+      <div class="divider"></div>
+      <p style="color:var(--text-muted);max-width:520px;">Hands-on baking sessions in Arjan, Dubai. Leave with a loaf you made yourself and the knowledge to keep baking.</p>
+    </div>
+
+    <div class="workshop-grid">
+
+      <!-- Classic Sourdough -->
+      <div class="workshop-card">
+        <div class="workshop-img">
+          <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="225" fill="#141410"/><ellipse cx="200" cy="140" rx="110" ry="65" fill="#6B4226"/><ellipse cx="200" cy="128" rx="100" ry="56" fill="#8B5E3C"/><path d="M110,128 Q200,78 290,128" stroke="#C9A96E" stroke-width="1.5" fill="none" opacity="0.5"/></svg>
+          <span class="emoji">🍞</span>
+        </div>
+        <div class="workshop-body">
+          <p class="workshop-name">Classic Sourdough</p>
+          <p class="workshop-desc">Master the fundamentals — starter care, shaping, scoring, and baking in a Dutch oven. Perfect for beginners.</p>
+          <div class="workshop-meta">
+            <span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              ~3 hours
+            </span>
+            <span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Arjan / Barsha South, Dubai
+            </span>
+          </div>
+          <div style="margin-top:0.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
+            <span class="tag" style="color:var(--gold);border-color:var(--gold-dim);">Pricing coming soon</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flavoured Sourdough -->
+      <div class="workshop-card">
+        <div class="workshop-img">
+          <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="225" fill="#141008"/><ellipse cx="200" cy="140" rx="110" ry="65" fill="#5A4A1A"/><ellipse cx="200" cy="128" rx="100" ry="56" fill="#7A6828"/><circle cx="170" cy="120" r="8" fill="#3D6B1F" opacity="0.7"/><circle cx="200" cy="110" r="6" fill="#CC4444" opacity="0.7"/><circle cx="230" cy="120" r="8" fill="#3D6B1F" opacity="0.7"/><path d="M110,128 Q200,78 290,128" stroke="#C9A96E" stroke-width="1.5" fill="none" opacity="0.5"/></svg>
+          <span class="emoji">🌶️</span>
+        </div>
+        <div class="workshop-body">
+          <p class="workshop-name">Flavoured Sourdough</p>
+          <p class="workshop-desc">Take your sourdough further — inclusions, flavour layering, and developing your own signature loaf.</p>
+          <div class="workshop-meta">
+            <span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              ~3 hours
+            </span>
+            <span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Arjan / Barsha South, Dubai
+            </span>
+          </div>
+          <div style="margin-top:0.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
+            <span class="tag" style="color:var(--gold);border-color:var(--gold-dim);">Pricing coming soon</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chocolate Bread -->
+      <div class="workshop-card">
+        <div class="workshop-img">
+          <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="225" fill="#0D0808"/><ellipse cx="200" cy="140" rx="110" ry="65" fill="#3D1F0A"/><ellipse cx="200" cy="128" rx="100" ry="56" fill="#5C2E10"/><path d="M110,128 Q200,78 290,128" stroke="#8B6347" stroke-width="1.5" fill="none" opacity="0.5"/><ellipse cx="200" cy="120" rx="45" ry="14" fill="#7A3E1A" opacity="0.7"/></svg>
+          <span class="emoji">🍫</span>
+        </div>
+        <div class="workshop-body">
+          <p class="workshop-name">Chocolate Bread</p>
+          <p class="workshop-desc">Where baking meets indulgence — chocolate enriched doughs, swirls, and filling techniques.</p>
+          <div class="workshop-meta">
+            <span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              ~3 hours
+            </span>
+            <span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Arjan / Barsha South, Dubai
+            </span>
+          </div>
+          <div style="margin-top:0.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
+            <span class="tag" style="color:var(--gold);border-color:var(--gold-dim);">Pricing coming soon</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /workshop-grid -->
+
+
+    <!-- Interest Form -->
+    <div class="workshop-form-wrap">
+      <div class="form-sub-header">
+        <span class="section-label" style="justify-content:center;display:block;">Express Interest</span>
+        <h3>Reserve your spot</h3>
+        <p>Drop your details and we'll reach out when the next session is confirmed.</p>
+      </div>
+
+      <form id="workshop-form" action="https://formspree.io/f/XXXXXXXX" method="POST" novalidate>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="wf-name">Name <span style="color:var(--gold)">*</span></label>
+            <input type="text" id="wf-name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-field">
+            <label for="wf-email">Email <span style="color:var(--gold)">*</span></label>
+            <input type="email" id="wf-email" name="email" placeholder="you@email.com" required />
+          </div>
+          <div class="form-field">
+            <label for="wf-phone">Phone <span style="color:var(--text-muted);font-weight:400;letter-spacing:0">(optional)</span></label>
+            <input type="tel" id="wf-phone" name="phone" placeholder="+971 50 000 0000" />
+          </div>
+          <div class="form-field">
+            <label for="wf-workshop">Workshop <span style="color:var(--gold)">*</span></label>
+            <select id="wf-workshop" name="workshop" required>
+              <option value="" disabled selected>Select a workshop</option>
+              <option value="Classic Sourdough">Classic Sourdough</option>
+              <option value="Flavoured Sourdough">Flavoured Sourdough</option>
+              <option value="Chocolate Bread">Chocolate Bread</option>
+            </select>
+          </div>
+          <div class="form-field full">
+            <label for="wf-message">Message <span style="color:var(--text-muted);font-weight:400;letter-spacing:0">(optional)</span></label>
+            <textarea id="wf-message" name="message" placeholder="Any questions or dietary requirements?"></textarea>
+          </div>
+          <div class="form-field full form-submit">
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Send interest</button>
+          </div>
+        </div>
+        <div class="form-success" id="form-success">
+          Thank you — we'll be in touch soon.
+        </div>
+      </form>
+    </div>
+
+
+    <!-- Google Maps -->
+    <div class="map-wrap">
+      <iframe
+        title="Doughra location — Arjan, Dubai"
+        loading="lazy"
+        src="https://maps.google.com/maps?q=Arjan+Dubai+UAE&output=embed&z=14"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FIND US
+════════════════════════════════════════════════════════════════════ -->
+<section id="find-us">
+  <div class="container">
+    <div class="section-header" style="text-align:center;">
+      <span class="section-label" style="display:block;">Order &amp; Connect</span>
+      <h2>Find Us</h2>
+      <div class="divider" style="margin:1.25rem auto;"></div>
+      <p class="find-us-delivery">We deliver across all of Dubai.</p>
+    </div>
+
+    <div class="find-us-links">
+      <!-- Deliveroo -->
+      <a href="#" class="find-us-btn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4c.829 0 1.5.671 1.5 1.5S12.829 7 12 7s-1.5-.671-1.5-1.5S11.171 4 12 4zm5 9.5c0 2.485-2.015 4.5-4.5 4.5S8 15.985 8 13.5v-3h8v3z"/></svg>
+        Deliveroo
+      </a>
+
+      <!-- Careem -->
+      <a href="#" class="find-us-btn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+        Careem
+      </a>
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/971500000000?text=Hi%20Doughra%2C%20I%27d%20like%20to%20place%20an%20order" class="find-us-btn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://instagram.com/doughra.ae" class="find-us-btn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        @doughra.ae
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-logo">Doughra</p>
+      <ul class="footer-nav">
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#bread-school">Bread School</a></li>
+        <li><a href="#workshops">Workshops</a></li>
+        <li><a href="#find-us">Find Us</a></li>
+      </ul>
+      <p class="footer-handle">
+        <a href="https://instagram.com/doughra.ae" target="_blank" rel="noopener">@doughra.ae</a>
+      </p>
+      <p class="footer-copy">© 2026 Doughra. All rights reserved. Dubai, UAE.</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════════════════════ -->
+<script>
+  // ─── NAV SCROLL ──────────────────────────────────────────────
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // ─── HAMBURGER ───────────────────────────────────────────────
+  const hamburger = document.getElementById('hamburger');
+  const drawer    = document.getElementById('nav-drawer');
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('open');
+    drawer.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  function closeDrawer() {
+    hamburger.classList.remove('open');
+    drawer.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ─── CART STATE ──────────────────────────────────────────────
+  const PRODUCTS = {
+    classic:       { name: 'The Classic',         loaf: true,  prices: { 24: 24, 32: 32 } },
+    rye:           { name: 'The Rye',              loaf: true,  prices: { 24: 24, 32: 32 } },
+    protein:       { name: 'The Protein',          loaf: true,  prices: { 24: 24, 32: 32 } },
+    manoushe:      { name: 'The Manoushe',         loaf: true,  prices: { 24: 24, 32: 32 } },
+    spicy:         { name: 'The Spicy One',        loaf: true,  prices: { 24: 24, 32: 32 } },
+    sweet:         { name: 'The Sweet One',        loaf: true,  prices: { 24: 24, 32: 32 } },
+    zaatar:        { name: "Za'atar Bombs",        loaf: false, price: 20 },
+    chocbombs:     { name: 'Chocolate Bombs',      loaf: false, price: 20 },
+    brownie:       { name: 'The Brownie',          loaf: false, price: 40 },
+    healthybrownie:{ name: 'The Healthy Brownie',  loaf: false, price: 55 },
+  };
+
+  // cart: { id: { name, size|null, qty, unitPrice } }
+  const cart = {};
+
+  function getSize(id) {
+    const el = document.getElementById('size-' + id);
+    return el ? el.value : null;
+  }
+
+  function syncPrice(id, val) {
+    const priceEl = document.getElementById('price-' + id);
+    if (priceEl) priceEl.textContent = val + ' AED';
+    // update cart if already has qty
+    if (cart[id] && cart[id].qty > 0) {
+      cart[id].unitPrice = Number(val);
+      cart[id].size = getSizeLabel(id);
+      updateSummary();
+    }
+  }
+
+  function getSizeLabel(id) {
+    const el = document.getElementById('size-' + id);
+    if (!el) return null;
+    return el.value === '24' ? 'Regular' : 'Large';
+  }
+
+  function changeQty(id, delta) {
+    const qtyEl = document.getElementById('qty-' + id);
+    const current = cart[id] ? cart[id].qty : 0;
+    const newQty  = Math.max(0, current + delta);
+
+    qtyEl.textContent = newQty;
+
+    const p = PRODUCTS[id];
+    if (newQty === 0) {
+      delete cart[id];
+    } else {
+      const size      = getSizeLabel(id);
+      const unitPrice = p.loaf ? Number(getSize(id)) : p.price;
+      cart[id] = { name: p.name, size, qty: newQty, unitPrice };
+    }
+
+    updateSummary();
+  }
+
+  function updateSummary() {
+    const items  = Object.values(cart).filter(i => i.qty > 0);
+    const total  = items.reduce((s, i) => s + i.qty * i.unitPrice, 0);
+    const summEl = document.getElementById('cart-summary');
+
+    if (items.length === 0) {
+      summEl.textContent = '';
+    } else {
+      const count = items.reduce((s, i) => s + i.qty, 0);
+      summEl.textContent = `${count} item${count !== 1 ? 's' : ''} · ${total} AED`;
+    }
+  }
+
+  function buildWhatsAppURL() {
+    const items = Object.values(cart).filter(i => i.qty > 0);
+    if (items.length === 0) return null;
+
+    const lines = items.map(i =>
+      `• ${i.name}${i.size ? ' (' + i.size + ')' : ''} ×${i.qty} — ${i.qty * i.unitPrice} AED`
+    );
+    const total = items.reduce((s, i) => s + i.qty * i.unitPrice, 0);
+    const msg   = `Hi Doughra! I'd like to place an order:\n\n${lines.join('\n')}\n\nTotal: ${total} AED\n\nThank you!`;
+    return `https://wa.me/971500000000?text=${encodeURIComponent(msg)}`;
+  }
+
+  function handleWAOrder(e) {
+    const url = buildWhatsAppURL();
+    if (!url) {
+      e.preventDefault();
+      alert('Please add at least one item to your order.');
+      return false;
+    }
+    document.getElementById('wa-order-btn').href = url;
+    return true;
+  }
+
+  // ─── WORKSHOP FORM ───────────────────────────────────────────
+  document.getElementById('workshop-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const btn = this.querySelector('button[type="submit"]');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      const data = new FormData(this);
+      const res  = await fetch(this.action, {
+        method:  'POST',
+        body:    data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        this.style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } else {
+        throw new Error('Server error');
+      }
+    } catch {
+      btn.textContent = 'Send interest';
+      btn.disabled = false;
+      alert('Something went wrong. Please try again or reach out via WhatsApp.');
+    }
+  });
+</script>
+
+</body>
+</html>
