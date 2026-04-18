@@ -679,10 +679,16 @@
       background: var(--brown);
     }
     h2 {
-      color: var(--espresso);
-      font-size: clamp(2.5rem, 6vw, 4rem) !important;
-      line-height: 1 !important;
+      color: var(--ink) !important;
+      font-family: 'Inter Tight', sans-serif !important;
+      font-style: normal !important;
+      font-size: clamp(2.25rem, 5.6vw, 3.6rem) !important;
+      font-weight: 800 !important;
+      line-height: 1.02 !important;
+      letter-spacing: -0.03em !important;
     }
+    /* Shop now leads — add nav clearance */
+    #shop { padding-top: calc(var(--nav-h) + 2.5rem) !important; }
     .divider { background: var(--brown); height: 1px; width: 36px; opacity: 0.6; }
 
     /* ─── BAKERY CARDS (editorial, matches .bread-card) ─────────── */
@@ -1112,6 +1118,319 @@
       border: none !important;
     }
     .workshop-cta:hover { background: var(--ink-soft) !important; color: var(--ivory-lite) !important; }
+
+    /* ─── LOAF GUIDE — expandable visual-only cards ─────────────
+       Replaces the old body/kicker/fun-fact/price layout.
+       Card = image with callouts + caption bar + toggle icon.
+       Click toggles .is-open which fades the extra callouts in. */
+    .section-lead {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--brown-mid);
+      max-width: 38rem;
+      margin: 0.9rem 0 0 !important;
+    }
+    .bread-card {
+      cursor: pointer;
+      outline: none;
+    }
+    .bread-card:focus-visible {
+      box-shadow: 0 0 0 3px var(--blue-soft), 0 0 0 5px var(--blue) !important;
+    }
+    /* Keep the image tall and editorial in the guide */
+    #bread-school .bread-card .loaf-viz { aspect-ratio: 4 / 5; }
+
+    /* Extra callouts — hidden by default, fade in on .is-open */
+    .loaf-callout--extra {
+      opacity: 0;
+      transform: translateY(6px) scale(0.96);
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+      pointer-events: none;
+    }
+    .bread-card.is-open .loaf-callout--extra {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .bread-card.is-open .loaf-callout--extra.loaf-callout--tr { transition-delay: 0.05s; }
+    .bread-card.is-open .loaf-callout--extra.loaf-callout--mr { transition-delay: 0.12s; }
+    .bread-card.is-open .loaf-callout--extra.loaf-callout--bl { transition-delay: 0.19s; }
+
+    /* Caption bar — name + +/× toggle */
+    .bread-card-caption {
+      padding: 1rem 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      border-top: 1px solid rgba(90, 56, 32, 0.08);
+      background: var(--ivory);
+    }
+    .bread-card-name {
+      font-family: 'Inter Tight', sans-serif !important;
+      font-style: normal !important;
+      font-size: 1.05rem !important;
+      font-weight: 600 !important;
+      color: var(--ink) !important;
+      line-height: 1.15 !important;
+      letter-spacing: -0.02em !important;
+      margin: 0 !important;
+    }
+    .bread-card-toggle {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--brown-fog);
+      border-radius: 50%;
+      background: var(--ivory-lite);
+      flex-shrink: 0;
+      transition: background 0.3s var(--ease), border-color 0.3s var(--ease), transform 0.3s var(--ease);
+    }
+    .bread-card:hover .bread-card-toggle { border-color: var(--brown-mid); transform: scale(1.04); }
+    .bread-card-toggle .toggle-line {
+      position: absolute;
+      background: var(--ink);
+      transition: transform 0.35s var(--ease), background 0.3s var(--ease), opacity 0.3s var(--ease);
+    }
+    .bread-card-toggle .toggle-line:nth-child(1) { width: 12px; height: 1.5px; }
+    .bread-card-toggle .toggle-line:nth-child(2) { width: 1.5px; height: 12px; }
+    .bread-card.is-open .bread-card-toggle {
+      background: var(--ink);
+      border-color: var(--ink);
+      transform: rotate(45deg);
+    }
+    .bread-card.is-open .bread-card-toggle .toggle-line { background: var(--ivory-lite); }
+
+    @media (max-width: 600px) {
+      #bread-school .bread-card .loaf-viz { aspect-ratio: 4 / 5; }
+    }
+
+    /* ─── BREAD SCHOOL (workshops) — images + form ──────────────
+       Cards now carry imagery, a "coming soon" badge, and a CTA
+       that scrolls to an inline interest form. */
+    #workshops .section-header { text-align: center; }
+    #workshops .section-header .divider { margin-inline: auto; }
+    .workshops-lead {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--brown-mid);
+      max-width: 40rem;
+      margin: 1rem auto 0 !important;
+      text-align: center;
+    }
+    .workshop-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+    .workshop-card {
+      display: flex !important;
+      flex-direction: column !important;
+      overflow: hidden !important;
+    }
+    .workshop-viz {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      background: var(--bone);
+      overflow: hidden;
+      border-bottom: 1px solid rgba(90, 56, 32, 0.08);
+    }
+    .workshop-viz img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s var(--ease);
+    }
+    .workshop-card:hover .workshop-viz img { transform: scale(1.03); }
+    .workshop-badge {
+      position: absolute;
+      top: 0.85rem;
+      left: 0.85rem;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ivory-lite);
+      background: rgba(26, 19, 16, 0.82);
+      padding: 0.35rem 0.65rem;
+      border-radius: 100px;
+      backdrop-filter: blur(4px);
+    }
+    .workshop-body {
+      padding: 1.25rem 1.35rem 1.35rem !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0.5rem !important;
+      flex: 1;
+    }
+    .workshop-kicker {
+      font-family: 'Inter Tight', sans-serif !important;
+      font-size: 0.63rem !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.16em !important;
+      text-transform: uppercase !important;
+      color: var(--cognac) !important;
+      margin: 0 !important;
+    }
+    .workshop-desc {
+      font-family: 'Inter Tight', sans-serif !important;
+      font-size: 0.85rem !important;
+      line-height: 1.5 !important;
+      color: var(--brown-mid) !important;
+      margin: 0 !important;
+    }
+    .workshop-cta {
+      margin-top: auto !important;
+      padding: 0.7rem 1rem !important;
+      border-radius: 100px !important;
+      text-align: center;
+      font-family: 'Inter Tight', sans-serif !important;
+      font-size: 0.72rem !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.1em !important;
+      text-transform: uppercase !important;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    /* Interest form panel */
+    .workshop-interest {
+      margin-top: 3.5rem;
+      background: var(--ink);
+      color: var(--ivory-lite);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      padding: clamp(1.75rem, 4vw, 2.75rem);
+    }
+    .workshop-interest-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: start;
+    }
+    .workshop-interest-copy .section-label {
+      color: var(--cognac) !important;
+    }
+    .workshop-interest-copy .section-label::before {
+      background: var(--cognac) !important;
+    }
+    .workshop-interest-copy h3 {
+      font-family: 'Inter Tight', sans-serif;
+      font-style: normal;
+      font-size: clamp(1.75rem, 3.4vw, 2.4rem);
+      font-weight: 800;
+      color: var(--ivory-lite);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin: 0.5rem 0 0.75rem;
+    }
+    .workshop-interest-copy p {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: rgba(245, 241, 232, 0.72);
+      max-width: 26rem;
+      margin: 0;
+    }
+    .workshop-interest-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+    }
+    .workshop-interest-form label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(245, 241, 232, 0.62);
+    }
+    .workshop-interest-form label.span-2 { grid-column: span 2; }
+    .workshop-interest-form input,
+    .workshop-interest-form select {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--ivory-lite);
+      background: rgba(245, 241, 232, 0.08);
+      border: 1px solid rgba(245, 241, 232, 0.14);
+      border-radius: 10px;
+      padding: 0.75rem 0.9rem;
+      outline: none;
+      transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+    }
+    .workshop-interest-form input::placeholder {
+      color: rgba(245, 241, 232, 0.4);
+      font-weight: 400;
+    }
+    .workshop-interest-form input:focus,
+    .workshop-interest-form select:focus {
+      border-color: var(--cognac);
+      background: rgba(245, 241, 232, 0.12);
+    }
+    .workshop-interest-form select option {
+      background: var(--ink);
+      color: var(--ivory-lite);
+    }
+    .workshop-interest-submit {
+      grid-column: span 2;
+      margin-top: 0.35rem;
+      background: var(--cognac);
+      color: var(--ivory-lite);
+      border: none;
+      border-radius: 100px;
+      padding: 0.95rem 1.25rem;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s var(--ease), transform 0.3s var(--ease);
+    }
+    .workshop-interest-submit:hover {
+      background: var(--cognac-deep);
+      transform: translateY(-1px);
+    }
+    .workshop-thanks {
+      grid-column: span 2;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--ivory-lite);
+      background: rgba(184, 134, 94, 0.15);
+      border: 1px solid rgba(184, 134, 94, 0.4);
+      border-radius: 10px;
+      padding: 1.1rem 1.25rem;
+      margin: 0;
+    }
+    .workshop-thanks strong { color: var(--cognac); font-weight: 700; }
+
+    @media (max-width: 900px) {
+      .workshop-grid { grid-template-columns: repeat(2, 1fr); }
+      .workshop-interest-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .workshop-grid { grid-template-columns: 1fr; }
+      .workshop-interest-form { grid-template-columns: 1fr; }
+      .workshop-interest-form label.span-2 { grid-column: auto; }
+      .workshop-interest-submit { grid-column: auto; }
+      .workshop-thanks { grid-column: auto; }
+    }
 
     /* ─── FOOTER ───────────────────────────────────────────────── */
     footer {
@@ -1554,7 +1873,7 @@
 <nav id="nav">
   <div class="container">
     <div class="nav-inner">
-      <a href="#hero" class="nav-logo">Doughra</a>
+      <a href="#top" class="nav-logo">Doughra</a>
       <ul class="nav-links">
         <li><a href="#shop">Bakery</a></li>
         <li><a href="#bread-school">Loaf Guide</a></li>
@@ -1581,19 +1900,9 @@
 
 
 <!-- ═══════════════════════════════════════════════════════════════
-     HERO — compact top band, products appear below in first viewport
+     SHOP — first section (hero removed; bakery leads)
 ════════════════════════════════════════════════════════════════════ -->
-<section id="hero">
-  <div class="container hero-content">
-    <h1 class="hero-headline">Sourdough, slow-baked in Dubai.</h1>
-    <p class="hero-meta">Wild yeast · 36-hour ferment · Small batch</p>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════════
-     SHOP
-════════════════════════════════════════════════════════════════════ -->
+<span id="top" aria-hidden="true"></span>
 <section id="shop">
   <div class="container">
     <div class="section-header">
@@ -1881,10 +2190,10 @@
     </div><!-- /shop-group sweets -->
 
 
-    <!-- STARTER KIT -->
+    <!-- BAKE AT HOME -->
     <div class="shop-group">
-      <p class="shop-group-label">Starter Kit</p>
-      <div class="product-grid" style="max-width:760px;">
+      <p class="shop-group-label">Bake at Home</p>
+      <div class="product-grid">
         <article class="product-card">
           <div class="loaf-viz">
             <img src="images/starter.jpg" alt="Sourdough starter — 100g jar" loading="lazy">
@@ -1927,7 +2236,7 @@
           </div>
         </article>
       </div>
-    </div><!-- /shop-group starter -->
+    </div><!-- /shop-group bake-at-home -->
 
   </div>
 </section>
@@ -1940,123 +2249,106 @@
   <div class="container">
     <div class="section-header">
       <span class="section-label">Read · Compare · Choose</span>
-      <h2>Find Your Loaf</h2>
+      <h2>Loaf Guide</h2>
+      <p class="section-lead">Tap any loaf to uncover what makes it yours.</p>
       <div class="divider"></div>
     </div>
 
     <div class="bread-grid">
 
       <!-- The Classic -->
-      <article class="bread-card" data-loaf="classic">
+      <article class="bread-card" onclick="toggleLoafCard(this)" tabindex="0" role="button" aria-expanded="false" aria-label="Explore The Classic">
         <div class="loaf-viz">
           <img src="images/classic.jpg" alt="The Classic sourdough — cross-section" loading="lazy">
           <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">36h ferment</span></span>
-          <span class="loaf-callout loaf-callout--tr"><span class="callout-line"></span><span class="callout-label">Wild yeast</span></span>
           <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Open crumb</span></span>
+          <span class="loaf-callout loaf-callout--tr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Wild yeast</span></span>
+          <span class="loaf-callout loaf-callout--mr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Naturally leavened</span></span>
+          <span class="loaf-callout loaf-callout--bl loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Gut-friendly</span></span>
         </div>
-        <div class="bread-card-body">
+        <div class="bread-card-caption">
           <p class="bread-card-name">The Classic</p>
-          <p class="bread-card-kicker">Long fermented · Naturally leavened · Gut-friendly</p>
-          <p class="bread-fun-fact"><strong>Did you know?</strong> The long fermentation breaks down gluten proteins, making sourdough easier to digest — even for some gluten-sensitive eaters.</p>
-          <div class="bread-card-foot">
-            <span class="bread-card-price">from 24 AED</span>
-            <button class="btn btn-add-cart" data-add="classic" onclick="changeQty('classic',1)">Add to cart</button>
-          </div>
+          <span class="bread-card-toggle" aria-hidden="true"><span class="toggle-line"></span><span class="toggle-line"></span></span>
         </div>
       </article>
 
       <!-- The Rye -->
-      <article class="bread-card" data-loaf="rye">
+      <article class="bread-card" onclick="toggleLoafCard(this)" tabindex="0" role="button" aria-expanded="false" aria-label="Explore The Rye">
         <div class="loaf-viz">
           <img src="images/rye.jpg" alt="The Rye sourdough — cross-section" loading="lazy">
           <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">High fibre</span></span>
-          <span class="loaf-callout loaf-callout--mr"><span class="callout-line"></span><span class="callout-label">Dark crumb</span></span>
-          <span class="loaf-callout loaf-callout--bl"><span class="callout-line"></span><span class="callout-label">Low GI</span></span>
+          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Low GI</span></span>
+          <span class="loaf-callout loaf-callout--tr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Dark crumb</span></span>
+          <span class="loaf-callout loaf-callout--mr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Microbiome fuel</span></span>
+          <span class="loaf-callout loaf-callout--bl loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Arabinoxylan</span></span>
         </div>
-        <div class="bread-card-body">
+        <div class="bread-card-caption">
           <p class="bread-card-name">The Rye</p>
-          <p class="bread-card-kicker">High-fibre · Microbiome fuel · Earthy &amp; deep</p>
-          <p class="bread-fun-fact"><strong>Did you know?</strong> Rye contains a unique fibre called arabinoxylan that feeds beneficial gut bacteria more effectively than most other grains.</p>
-          <div class="bread-card-foot">
-            <span class="bread-card-price">from 24 AED</span>
-            <button class="btn btn-add-cart" data-add="rye" onclick="changeQty('rye',1)">Add to cart</button>
-          </div>
+          <span class="bread-card-toggle" aria-hidden="true"><span class="toggle-line"></span><span class="toggle-line"></span></span>
         </div>
       </article>
 
       <!-- The Protein -->
-      <article class="bread-card" data-loaf="protein">
+      <article class="bread-card" onclick="toggleLoafCard(this)" tabindex="0" role="button" aria-expanded="false" aria-label="Explore The Protein">
         <div class="loaf-viz">
           <img src="images/protein.jpg" alt="The Protein sourdough — cross-section" loading="lazy">
           <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">+Protein</span></span>
-          <span class="loaf-callout loaf-callout--tr"><span class="callout-line"></span><span class="callout-label">Seeds &amp; grains</span></span>
           <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Macro-friendly</span></span>
+          <span class="loaf-callout loaf-callout--tr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Seeds &amp; grains</span></span>
+          <span class="loaf-callout loaf-callout--mr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Satiating</span></span>
+          <span class="loaf-callout loaf-callout--bl loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Training fuel</span></span>
         </div>
-        <div class="bread-card-body">
+        <div class="bread-card-caption">
           <p class="bread-card-name">The Protein</p>
-          <p class="bread-card-kicker">Macro-friendly · Satisfying · Training-fuel</p>
-          <p class="bread-fun-fact"><strong>Did you know?</strong> Higher protein per slice gives you the carb-satisfaction of bread while staying closer to your macros. No compromises.</p>
-          <div class="bread-card-foot">
-            <span class="bread-card-price">from 24 AED</span>
-            <button class="btn btn-add-cart" data-add="protein" onclick="changeQty('protein',1)">Add to cart</button>
-          </div>
+          <span class="bread-card-toggle" aria-hidden="true"><span class="toggle-line"></span><span class="toggle-line"></span></span>
         </div>
       </article>
 
       <!-- The Manoushe -->
-      <article class="bread-card" data-loaf="manoushe">
+      <article class="bread-card" onclick="toggleLoafCard(this)" tabindex="0" role="button" aria-expanded="false" aria-label="Explore The Manoushe">
         <div class="loaf-viz">
           <img src="images/manoushe.jpg" alt="The Manoushe za'atar flatbread" loading="lazy">
           <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">Za'atar</span></span>
-          <span class="loaf-callout loaf-callout--mr"><span class="callout-line"></span><span class="callout-label">Olive oil</span></span>
-          <span class="loaf-callout loaf-callout--bl"><span class="callout-line"></span><span class="callout-label">Thymol-rich</span></span>
+          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Olive oil</span></span>
+          <span class="loaf-callout loaf-callout--tr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Thymol-rich</span></span>
+          <span class="loaf-callout loaf-callout--mr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Heart-healthy</span></span>
+          <span class="loaf-callout loaf-callout--bl loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Levantine</span></span>
         </div>
-        <div class="bread-card-body">
+        <div class="bread-card-caption">
           <p class="bread-card-name">The Manoushe</p>
-          <p class="bread-card-kicker">Antioxidant-rich · Heart-healthy · Levantine heritage</p>
-          <p class="bread-fun-fact"><strong>Did you know?</strong> Za'atar has been used in the Levant for over 2,000 years — not just for flavour, but as a natural antimicrobial and brain booster.</p>
-          <div class="bread-card-foot">
-            <span class="bread-card-price">from 24 AED</span>
-            <button class="btn btn-add-cart" data-add="manoushe" onclick="changeQty('manoushe',1)">Add to cart</button>
-          </div>
+          <span class="bread-card-toggle" aria-hidden="true"><span class="toggle-line"></span><span class="toggle-line"></span></span>
         </div>
       </article>
 
       <!-- The Spicy One -->
-      <article class="bread-card" data-loaf="spicy">
+      <article class="bread-card" onclick="toggleLoafCard(this)" tabindex="0" role="button" aria-expanded="false" aria-label="Explore The Spicy One">
         <div class="loaf-viz">
           <img src="images/spicy.jpg" alt="The Spicy One — jalapeño cheddar sourdough" loading="lazy">
           <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">Jalapeño</span></span>
-          <span class="loaf-callout loaf-callout--tr"><span class="callout-line"></span><span class="callout-label">Aged cheddar</span></span>
-          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Slow bake</span></span>
+          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Aged cheddar</span></span>
+          <span class="loaf-callout loaf-callout--tr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Slow bake</span></span>
+          <span class="loaf-callout loaf-callout--mr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Metabolism+</span></span>
+          <span class="loaf-callout loaf-callout--bl loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Bold comfort</span></span>
         </div>
-        <div class="bread-card-body">
+        <div class="bread-card-caption">
           <p class="bread-card-name">The Spicy One</p>
-          <p class="bread-card-kicker">Metabolism boost · Calcium &amp; protein · Bold comfort</p>
-          <p class="bread-fun-fact"><strong>Did you know?</strong> Capsaicin — the compound that makes jalapeños hot — has been shown to temporarily raise metabolic rate by up to 8%.</p>
-          <div class="bread-card-foot">
-            <span class="bread-card-price">from 24 AED</span>
-            <button class="btn btn-add-cart" data-add="spicy" onclick="changeQty('spicy',1)">Add to cart</button>
-          </div>
+          <span class="bread-card-toggle" aria-hidden="true"><span class="toggle-line"></span><span class="toggle-line"></span></span>
         </div>
       </article>
 
       <!-- The Sweet One -->
-      <article class="bread-card" data-loaf="sweet">
+      <article class="bread-card" onclick="toggleLoafCard(this)" tabindex="0" role="button" aria-expanded="false" aria-label="Explore The Sweet One">
         <div class="loaf-viz">
           <img src="images/sweet.jpg" alt="The Sweet One — honey goat cheese sourdough" loading="lazy">
           <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">Goat cheese</span></span>
-          <span class="loaf-callout loaf-callout--mr"><span class="callout-line"></span><span class="callout-label">Raw honey</span></span>
-          <span class="loaf-callout loaf-callout--bl"><span class="callout-line"></span><span class="callout-label">Sweet-savoury</span></span>
+          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Raw honey</span></span>
+          <span class="loaf-callout loaf-callout--tr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Sweet-savoury</span></span>
+          <span class="loaf-callout loaf-callout--mr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Easy digestion</span></span>
+          <span class="loaf-callout loaf-callout--bl loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Natural sugar</span></span>
         </div>
-        <div class="bread-card-body">
+        <div class="bread-card-caption">
           <p class="bread-card-name">The Sweet One</p>
-          <p class="bread-card-kicker">Easy on digestion · Natural sweetener · Balanced</p>
-          <p class="bread-fun-fact"><strong>Did you know?</strong> Goat milk is naturally homogenised — smaller fat globules than cow milk — which makes it gentler on the digestive system.</p>
-          <div class="bread-card-foot">
-            <span class="bread-card-price">from 24 AED</span>
-            <button class="btn btn-add-cart" data-add="sweet" onclick="changeQty('sweet',1)">Add to cart</button>
-          </div>
+          <span class="bread-card-toggle" aria-hidden="true"><span class="toggle-line"></span><span class="toggle-line"></span></span>
         </div>
       </article>
 
@@ -2071,7 +2363,9 @@
 <section id="workshops">
   <div class="container">
     <div class="section-header">
+      <span class="section-label">Learn · Bake · Take home</span>
       <h2>Bread School</h2>
+      <p class="workshops-lead">Small-group, hands-on workshops in our Dubai kitchen. We're not open for booking yet — leave your details and we'll reach out the moment a date is set.</p>
       <div class="divider"></div>
     </div>
 
@@ -2079,44 +2373,79 @@
 
       <!-- Classic Sourdough -->
       <article class="workshop-card">
+        <div class="workshop-viz">
+          <img src="images/workshop-classic.jpg" alt="Classic sourdough workshop — shaping a boule" loading="lazy">
+          <span class="workshop-badge">Not open yet</span>
+        </div>
         <div class="workshop-body">
-          <p class="workshop-kicker">Beginner</p>
+          <p class="workshop-kicker">Beginner · ~3 hours</p>
           <p class="workshop-name">Classic Sourdough</p>
-          <p class="workshop-desc">Starter, shaping, scoring, Dutch oven bake.</p>
-          <div class="workshop-meta">
-            <span>~3 hours</span><span aria-hidden="true">·</span><span>Arjan, Dubai</span>
-          </div>
-          <a class="workshop-cta" href="https://wa.me/971507305023?text=Hi%20Doughra!%20I'd%20like%20to%20join%20the%20Classic%20Sourdough%20workshop." target="_blank" rel="noopener">Register interest</a>
+          <p class="workshop-desc">Build a starter, shape a boule, score with confidence, bake in a Dutch oven. You leave with a loaf and a jar of live starter.</p>
+          <button class="workshop-cta" type="button" onclick="openWorkshopInterest('Classic Sourdough')">Tell me when it opens</button>
         </div>
       </article>
 
       <!-- Flavoured Sourdough -->
       <article class="workshop-card">
+        <div class="workshop-viz">
+          <img src="images/workshop-flavoured.jpg" alt="Flavoured sourdough workshop — toppings and inclusions" loading="lazy">
+          <span class="workshop-badge">Not open yet</span>
+        </div>
         <div class="workshop-body">
-          <p class="workshop-kicker">Intermediate</p>
+          <p class="workshop-kicker">Intermediate · ~3 hours</p>
           <p class="workshop-name">Flavoured Sourdough</p>
-          <p class="workshop-desc">Inclusions, flavour layering, signature loaves.</p>
-          <div class="workshop-meta">
-            <span>~3 hours</span><span aria-hidden="true">·</span><span>Arjan, Dubai</span>
-          </div>
-          <a class="workshop-cta" href="https://wa.me/971507305023?text=Hi%20Doughra!%20I'd%20like%20to%20join%20the%20Flavoured%20Sourdough%20workshop." target="_blank" rel="noopener">Register interest</a>
+          <p class="workshop-desc">Inclusions, layering, and signature loaves — za'atar, cheddar &amp; jalapeño, honey &amp; goat cheese. Flavour built into the dough.</p>
+          <button class="workshop-cta" type="button" onclick="openWorkshopInterest('Flavoured Sourdough')">Tell me when it opens</button>
         </div>
       </article>
 
       <!-- Chocolate Bread -->
       <article class="workshop-card">
+        <div class="workshop-viz">
+          <img src="images/workshop-chocolate.jpg" alt="Chocolate bread workshop — enriched chocolate dough swirl" loading="lazy">
+          <span class="workshop-badge">Not open yet</span>
+        </div>
         <div class="workshop-body">
-          <p class="workshop-kicker">Indulgent</p>
+          <p class="workshop-kicker">Indulgent · ~3 hours</p>
           <p class="workshop-name">Chocolate Bread</p>
-          <p class="workshop-desc">Enriched doughs, swirls, and fillings.</p>
-          <div class="workshop-meta">
-            <span>~3 hours</span><span aria-hidden="true">·</span><span>Arjan, Dubai</span>
-          </div>
-          <a class="workshop-cta" href="https://wa.me/971507305023?text=Hi%20Doughra!%20I'd%20like%20to%20join%20the%20Chocolate%20Bread%20workshop." target="_blank" rel="noopener">Register interest</a>
+          <p class="workshop-desc">Enriched doughs, deep dark-chocolate fillings, the swirl technique — the one class that ends with a babka loaf in your hands.</p>
+          <button class="workshop-cta" type="button" onclick="openWorkshopInterest('Chocolate Bread')">Tell me when it opens</button>
         </div>
       </article>
 
     </div><!-- /workshop-grid -->
+
+    <!-- INTEREST FORM — single form below the cards -->
+    <div class="workshop-interest" id="workshop-interest">
+      <div class="workshop-interest-inner">
+        <div class="workshop-interest-copy">
+          <span class="section-label">The list</span>
+          <h3>Be the first to know.</h3>
+          <p>Drop your details. When we set dates, you'll hear from us before we announce — so you can grab a spot before they fill.</p>
+        </div>
+        <form class="workshop-interest-form" id="workshop-interest-form" action="https://formspree.io/f/XXXXXXXX" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="Bread School — early-access signup">
+          <label>Name
+            <input type="text" name="name" required placeholder="Your name" autocomplete="name">
+          </label>
+          <label>Phone
+            <input type="tel" name="phone" required placeholder="+971 5X XXX XXXX" autocomplete="tel">
+          </label>
+          <label class="span-2">Email
+            <input type="email" name="email" required placeholder="you@email.com" autocomplete="email">
+          </label>
+          <label class="span-2">Which workshop?
+            <select name="workshop" id="workshop-select">
+              <option value="Classic Sourdough">Classic Sourdough</option>
+              <option value="Flavoured Sourdough">Flavoured Sourdough</option>
+              <option value="Chocolate Bread">Chocolate Bread</option>
+              <option value="Any / I'm open">I'm open — any of them</option>
+            </select>
+          </label>
+          <button type="submit" class="workshop-interest-submit">Add me to the list</button>
+        </form>
+      </div>
+    </div>
 
   </div>
 </section>
@@ -2442,6 +2771,75 @@
   } else {
     document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('in'));
   }
+
+
+  // ─── LOAF GUIDE — expandable cards ───────────────────────────
+  function toggleLoafCard(el) {
+    const open = el.classList.toggle('is-open');
+    el.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  // Keyboard access (Enter/Space)
+  document.querySelectorAll('.bread-card').forEach(card => {
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleLoafCard(card);
+      }
+    });
+  });
+
+
+  // ─── BREAD SCHOOL — interest-form flow ───────────────────────
+  function openWorkshopInterest(workshopName) {
+    const select = document.getElementById('workshop-select');
+    if (select && workshopName) {
+      const match = Array.from(select.options).find(o => o.value === workshopName);
+      if (match) select.value = workshopName;
+    }
+    const target = document.getElementById('workshop-interest');
+    if (!target) return;
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Focus first blank field once scroll settles
+    window.setTimeout(() => {
+      const form = document.getElementById('workshop-interest-form');
+      if (!form) return;
+      const firstEmpty = Array.from(form.querySelectorAll('input')).find(i => !i.value);
+      (firstEmpty || form.querySelector('input'))?.focus();
+    }, 500);
+  }
+
+  // Form submit — graceful fallback if Formspree placeholder isn't live
+  (function () {
+    const form = document.getElementById('workshop-interest-form');
+    if (!form) return;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const who = (data.get('name') || '').toString().split(' ')[0] || 'friend';
+      const workshop = (data.get('workshop') || '').toString();
+      let delivered = false;
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        delivered = res.ok;
+      } catch (_) {
+        delivered = false;
+      }
+      // Replace form UI with a thank-you either way (Formspree ID is a
+      // placeholder until the real one is wired up — we still want a
+      // working UX so interest is captured mentally, not lost).
+      const thanks = document.createElement('p');
+      thanks.className = 'workshop-thanks';
+      thanks.innerHTML = delivered
+        ? `<strong>You're in, ${who}.</strong> We'll be in touch the moment <em>${workshop}</em> opens.`
+        : `<strong>Got it, ${who}.</strong> We've noted your interest in <em>${workshop}</em>. We'll reach out the moment a date is set.`;
+      form.innerHTML = '';
+      form.appendChild(thanks);
+    });
+  })();
 
 
 </script>
