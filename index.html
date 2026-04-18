@@ -269,13 +269,13 @@
     .hero-cta { display: none; }
 
     /* ─── SECTION COMMONS ───────────────────────────────────────── */
-    section { padding: clamp(5rem, 10vw, 8rem) 0; }
+    section { padding: clamp(3rem, 5.5vw, 4.75rem) 0; }
     section:nth-child(even) { background: var(--surface); }
-    .section-header { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+    .section-header { margin-bottom: clamp(1.75rem, 3.5vw, 2.5rem); }
 
     /* ─── SHOP ──────────────────────────────────────────────────── */
     #shop { background: var(--bg); }
-    .shop-group { margin-bottom: 4rem; }
+    .shop-group { margin-bottom: 2.75rem; }
     .shop-group:last-of-type { margin-bottom: 0; }
     .shop-group-label {
       font-family: 'Inter Tight', sans-serif;
@@ -1162,17 +1162,14 @@
     /* ─── BREAD SCHOOL (workshops) — images + form ──────────────
        Cards now carry imagery, a "coming soon" badge, and a CTA
        that scrolls to an inline interest form. */
-    #workshops .section-header { text-align: center; }
-    #workshops .section-header .divider { margin-inline: auto; }
     .workshops-lead {
       font-family: 'Inter Tight', sans-serif;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 400;
       line-height: 1.55;
       color: var(--brown-mid);
-      max-width: 40rem;
-      margin: 1rem auto 0 !important;
-      text-align: center;
+      max-width: 38rem;
+      margin: 0.9rem 0 0 !important;
     }
     .workshop-grid {
       display: grid;
@@ -1254,7 +1251,7 @@
 
     /* Interest form panel */
     .workshop-interest {
-      margin-top: 3.5rem;
+      margin-top: 2.25rem;
       background: var(--ink);
       color: var(--ivory-lite);
       border-radius: var(--radius-lg);
@@ -1276,18 +1273,18 @@
     .workshop-interest-copy h3 {
       font-family: 'Inter Tight', sans-serif;
       font-style: normal;
-      font-size: clamp(1.75rem, 3.4vw, 2.4rem);
+      font-size: clamp(2.1rem, 4.4vw, 3.1rem);
       font-weight: 800;
       color: var(--ivory-lite);
-      letter-spacing: -0.03em;
-      line-height: 1.05;
-      margin: 0.5rem 0 0.75rem;
+      letter-spacing: -0.035em;
+      line-height: 1;
+      margin: 0.5rem 0 0.85rem;
     }
     .workshop-interest-copy p {
       font-family: 'Inter Tight', sans-serif;
-      font-size: 0.92rem;
-      line-height: 1.55;
-      color: rgba(245, 241, 232, 0.72);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: rgba(245, 241, 232, 0.78);
       max-width: 26rem;
       margin: 0;
     }
@@ -2354,7 +2351,7 @@
     <div class="section-header">
       <span class="section-label">Learn · Bake · Take home</span>
       <h2>Bread School</h2>
-      <p class="workshops-lead">Small-group, hands-on workshops in our Dubai kitchen. Doors haven't opened yet — but the waitlist has. Everyone on it hears first, and a lucky few will be invited to the launch session <strong>on us</strong>.</p>
+      <p class="workshops-lead">Small-group, hands-on workshops in our Dubai kitchen. Launching soon — waitlist open below.</p>
       <div class="divider"></div>
     </div>
 
@@ -2408,13 +2405,13 @@
     <div class="workshop-interest" id="workshop-interest">
       <div class="workshop-interest-inner">
         <div class="workshop-interest-copy">
-          <span class="section-label">The waitlist</span>
-          <h3>One free seat is waiting. Could be yours.</h3>
-          <p>When we open the first workshop, we'll pull a handful of names from the waitlist — completely on us. Everyone else on the list gets first access before we announce publicly.</p>
+          <span class="section-label">Limited seats</span>
+          <h3>Join the waitlist.</h3>
+          <p>Get on the list and a few names get pulled for a <strong>free seat</strong> at the first session.</p>
           <ul class="workshop-interest-perks">
-            <li><span class="perk-dot" aria-hidden="true"></span>A chance at a free seat at the launch session</li>
-            <li><span class="perk-dot" aria-hidden="true"></span>First dibs on dates before anyone else</li>
-            <li><span class="perk-dot" aria-hidden="true"></span>Early-bird price when booking opens</li>
+            <li><span class="perk-dot" aria-hidden="true"></span>Chance at a free seat</li>
+            <li><span class="perk-dot" aria-hidden="true"></span>First to know when dates drop</li>
+            <li><span class="perk-dot" aria-hidden="true"></span>Early-bird pricing</li>
           </ul>
         </div>
         <form class="workshop-interest-form" id="workshop-interest-form" action="https://formspree.io/f/XXXXXXXX" method="POST" novalidate>
