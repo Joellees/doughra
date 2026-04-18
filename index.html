@@ -682,10 +682,10 @@
       color: var(--ink) !important;
       font-family: 'Inter Tight', sans-serif !important;
       font-style: normal !important;
-      font-size: clamp(2.25rem, 5.6vw, 3.6rem) !important;
+      font-size: clamp(1.85rem, 4.2vw, 2.65rem) !important;
       font-weight: 800 !important;
-      line-height: 1.02 !important;
-      letter-spacing: -0.03em !important;
+      line-height: 1.05 !important;
+      letter-spacing: -0.028em !important;
     }
     /* Shop now leads — add nav clearance */
     #shop { padding-top: calc(var(--nav-h) + 2.5rem) !important; }
@@ -837,11 +837,10 @@
       color: var(--brown-mid);
     }
 
-    /* Foot — label on left, qty pill on right */
+    /* Foot — label on left, qty pill on right (borderless) */
     .product-foot {
       margin-top: auto;
-      padding-top: 0.8rem;
-      border-top: 1px solid rgba(90, 56, 32, 0.08);
+      padding-top: 0.55rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -1119,52 +1118,26 @@
     }
     .workshop-cta:hover { background: var(--ink-soft) !important; color: var(--ivory-lite) !important; }
 
-    /* ─── LOAF GUIDE — expandable visual-only cards ─────────────
-       Replaces the old body/kicker/fun-fact/price layout.
-       Card = image with callouts + caption bar + toggle icon.
-       Click toggles .is-open which fades the extra callouts in. */
+    /* ─── LOAF GUIDE — visual info cards (non-interactive) ──────
+       Card = image with 5 visible callouts + name + subtitle. */
     .section-lead {
       font-family: 'Inter Tight', sans-serif;
       font-size: 0.95rem;
       font-weight: 400;
-      line-height: 1.5;
+      line-height: 1.55;
       color: var(--brown-mid);
       max-width: 38rem;
       margin: 0.9rem 0 0 !important;
     }
-    .bread-card {
-      cursor: pointer;
-      outline: none;
-    }
-    .bread-card:focus-visible {
-      box-shadow: 0 0 0 3px var(--blue-soft), 0 0 0 5px var(--blue) !important;
-    }
-    /* Keep the image tall and editorial in the guide */
+    /* Tall editorial aspect for loaf portraits */
     #bread-school .bread-card .loaf-viz { aspect-ratio: 4 / 5; }
 
-    /* Extra callouts — hidden by default, fade in on .is-open */
-    .loaf-callout--extra {
-      opacity: 0;
-      transform: translateY(6px) scale(0.96);
-      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
-      pointer-events: none;
-    }
-    .bread-card.is-open .loaf-callout--extra {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-    .bread-card.is-open .loaf-callout--extra.loaf-callout--tr { transition-delay: 0.05s; }
-    .bread-card.is-open .loaf-callout--extra.loaf-callout--mr { transition-delay: 0.12s; }
-    .bread-card.is-open .loaf-callout--extra.loaf-callout--bl { transition-delay: 0.19s; }
-
-    /* Caption bar — name + +/× toggle */
+    /* Caption bar — name + one-line subtitle */
     .bread-card-caption {
-      padding: 1rem 1.15rem;
+      padding: 1rem 1.15rem 1.1rem;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      border-top: 1px solid rgba(90, 56, 32, 0.08);
+      flex-direction: column;
+      gap: 0.3rem;
       background: var(--ivory);
     }
     .bread-card-name {
@@ -1177,36 +1150,13 @@
       letter-spacing: -0.02em !important;
       margin: 0 !important;
     }
-    .bread-card-toggle {
-      position: relative;
-      width: 30px;
-      height: 30px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--brown-fog);
-      border-radius: 50%;
-      background: var(--ivory-lite);
-      flex-shrink: 0;
-      transition: background 0.3s var(--ease), border-color 0.3s var(--ease), transform 0.3s var(--ease);
-    }
-    .bread-card:hover .bread-card-toggle { border-color: var(--brown-mid); transform: scale(1.04); }
-    .bread-card-toggle .toggle-line {
-      position: absolute;
-      background: var(--ink);
-      transition: transform 0.35s var(--ease), background 0.3s var(--ease), opacity 0.3s var(--ease);
-    }
-    .bread-card-toggle .toggle-line:nth-child(1) { width: 12px; height: 1.5px; }
-    .bread-card-toggle .toggle-line:nth-child(2) { width: 1.5px; height: 12px; }
-    .bread-card.is-open .bread-card-toggle {
-      background: var(--ink);
-      border-color: var(--ink);
-      transform: rotate(45deg);
-    }
-    .bread-card.is-open .bread-card-toggle .toggle-line { background: var(--ivory-lite); }
-
-    @media (max-width: 600px) {
-      #bread-school .bread-card .loaf-viz { aspect-ratio: 4 / 5; }
+    .bread-card-subtitle {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--brown-mid);
+      margin: 0;
     }
 
     /* ─── BREAD SCHOOL (workshops) — images + form ──────────────
@@ -1341,6 +1291,44 @@
       max-width: 26rem;
       margin: 0;
     }
+    .workshop-interest-perks {
+      list-style: none;
+      padding: 0;
+      margin: 1.1rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .workshop-interest-perks li {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      line-height: 1.45;
+      color: rgba(245, 241, 232, 0.88);
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+    .perk-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--cognac);
+      flex-shrink: 0;
+      transform: translateY(-2px);
+    }
+    .workshop-interest-fineprint {
+      grid-column: span 2;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: rgba(245, 241, 232, 0.45);
+      letter-spacing: 0;
+      text-transform: none;
+      margin: 0.4rem 0 0 !important;
+      text-align: center;
+    }
     .workshop-interest-form {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1430,6 +1418,7 @@
       .workshop-interest-form label.span-2 { grid-column: auto; }
       .workshop-interest-submit { grid-column: auto; }
       .workshop-thanks { grid-column: auto; }
+      .workshop-interest-fineprint { grid-column: auto; }
     }
 
     /* ─── FOOTER ───────────────────────────────────────────────── */
@@ -2250,105 +2239,105 @@
     <div class="section-header">
       <span class="section-label">Read · Compare · Choose</span>
       <h2>Loaf Guide</h2>
-      <p class="section-lead">Tap any loaf to uncover what makes it yours.</p>
+      <p class="section-lead">A loaf for every mood and every body. Here's what's actually inside each one — so you can pick the one that fits you.</p>
       <div class="divider"></div>
     </div>
 
     <div class="bread-grid">
 
       <!-- The Classic -->
-      <article class="bread-card" onclick="toggleLoafCard(this)" tabindex="0" role="button" aria-expanded="false" aria-label="Explore The Classic">
+      <article class="bread-card">
         <div class="loaf-viz">
           <img src="images/classic.jpg" alt="The Classic sourdough — cross-section" loading="lazy">
           <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">36h ferment</span></span>
-          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Open crumb</span></span>
-          <span class="loaf-callout loaf-callout--tr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Wild yeast</span></span>
-          <span class="loaf-callout loaf-callout--mr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Naturally leavened</span></span>
-          <span class="loaf-callout loaf-callout--bl loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Gut-friendly</span></span>
+          <span class="loaf-callout loaf-callout--tr"><span class="callout-line"></span><span class="callout-label">Wild yeast</span></span>
+          <span class="loaf-callout loaf-callout--mr"><span class="callout-line"></span><span class="callout-label">Open crumb</span></span>
+          <span class="loaf-callout loaf-callout--bl"><span class="callout-line"></span><span class="callout-label">Gut-friendly</span></span>
+          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Naturally leavened</span></span>
         </div>
         <div class="bread-card-caption">
           <p class="bread-card-name">The Classic</p>
-          <span class="bread-card-toggle" aria-hidden="true"><span class="toggle-line"></span><span class="toggle-line"></span></span>
+          <p class="bread-card-subtitle">Crackling crust, open crumb, long-fermented calm.</p>
         </div>
       </article>
 
       <!-- The Rye -->
-      <article class="bread-card" onclick="toggleLoafCard(this)" tabindex="0" role="button" aria-expanded="false" aria-label="Explore The Rye">
+      <article class="bread-card">
         <div class="loaf-viz">
           <img src="images/rye.jpg" alt="The Rye sourdough — cross-section" loading="lazy">
           <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">High fibre</span></span>
-          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Low GI</span></span>
-          <span class="loaf-callout loaf-callout--tr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Dark crumb</span></span>
-          <span class="loaf-callout loaf-callout--mr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Microbiome fuel</span></span>
-          <span class="loaf-callout loaf-callout--bl loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Arabinoxylan</span></span>
+          <span class="loaf-callout loaf-callout--tr"><span class="callout-line"></span><span class="callout-label">Dark crumb</span></span>
+          <span class="loaf-callout loaf-callout--mr"><span class="callout-line"></span><span class="callout-label">Microbiome fuel</span></span>
+          <span class="loaf-callout loaf-callout--bl"><span class="callout-line"></span><span class="callout-label">Low GI</span></span>
+          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Slow-release energy</span></span>
         </div>
         <div class="bread-card-caption">
           <p class="bread-card-name">The Rye</p>
-          <span class="bread-card-toggle" aria-hidden="true"><span class="toggle-line"></span><span class="toggle-line"></span></span>
+          <p class="bread-card-subtitle">Dense, nutty, deeply earthy — the one that keeps you full.</p>
         </div>
       </article>
 
       <!-- The Protein -->
-      <article class="bread-card" onclick="toggleLoafCard(this)" tabindex="0" role="button" aria-expanded="false" aria-label="Explore The Protein">
+      <article class="bread-card">
         <div class="loaf-viz">
           <img src="images/protein.jpg" alt="The Protein sourdough — cross-section" loading="lazy">
           <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">+Protein</span></span>
-          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Macro-friendly</span></span>
-          <span class="loaf-callout loaf-callout--tr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Seeds &amp; grains</span></span>
-          <span class="loaf-callout loaf-callout--mr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Satiating</span></span>
-          <span class="loaf-callout loaf-callout--bl loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Training fuel</span></span>
+          <span class="loaf-callout loaf-callout--tr"><span class="callout-line"></span><span class="callout-label">Seeds &amp; grains</span></span>
+          <span class="loaf-callout loaf-callout--mr"><span class="callout-line"></span><span class="callout-label">Satiating</span></span>
+          <span class="loaf-callout loaf-callout--bl"><span class="callout-line"></span><span class="callout-label">Macro-friendly</span></span>
+          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Training fuel</span></span>
         </div>
         <div class="bread-card-caption">
           <p class="bread-card-name">The Protein</p>
-          <span class="bread-card-toggle" aria-hidden="true"><span class="toggle-line"></span><span class="toggle-line"></span></span>
+          <p class="bread-card-subtitle">Built for the days you train — same soft bite, more to fuel you.</p>
         </div>
       </article>
 
       <!-- The Manoushe -->
-      <article class="bread-card" onclick="toggleLoafCard(this)" tabindex="0" role="button" aria-expanded="false" aria-label="Explore The Manoushe">
+      <article class="bread-card">
         <div class="loaf-viz">
           <img src="images/manoushe.jpg" alt="The Manoushe za'atar flatbread" loading="lazy">
           <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">Za'atar</span></span>
-          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Olive oil</span></span>
-          <span class="loaf-callout loaf-callout--tr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Thymol-rich</span></span>
-          <span class="loaf-callout loaf-callout--mr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Heart-healthy</span></span>
-          <span class="loaf-callout loaf-callout--bl loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Levantine</span></span>
+          <span class="loaf-callout loaf-callout--tr"><span class="callout-line"></span><span class="callout-label">Olive oil</span></span>
+          <span class="loaf-callout loaf-callout--mr"><span class="callout-line"></span><span class="callout-label">Heart-healthy</span></span>
+          <span class="loaf-callout loaf-callout--bl"><span class="callout-line"></span><span class="callout-label">Thymol-rich</span></span>
+          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Levantine</span></span>
         </div>
         <div class="bread-card-caption">
           <p class="bread-card-name">The Manoushe</p>
-          <span class="bread-card-toggle" aria-hidden="true"><span class="toggle-line"></span><span class="toggle-line"></span></span>
+          <p class="bread-card-subtitle">Breakfast in the Levant, in loaf form.</p>
         </div>
       </article>
 
       <!-- The Spicy One -->
-      <article class="bread-card" onclick="toggleLoafCard(this)" tabindex="0" role="button" aria-expanded="false" aria-label="Explore The Spicy One">
+      <article class="bread-card">
         <div class="loaf-viz">
           <img src="images/spicy.jpg" alt="The Spicy One — jalapeño cheddar sourdough" loading="lazy">
           <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">Jalapeño</span></span>
-          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Aged cheddar</span></span>
-          <span class="loaf-callout loaf-callout--tr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Slow bake</span></span>
-          <span class="loaf-callout loaf-callout--mr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Metabolism+</span></span>
-          <span class="loaf-callout loaf-callout--bl loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Bold comfort</span></span>
+          <span class="loaf-callout loaf-callout--tr"><span class="callout-line"></span><span class="callout-label">Aged cheddar</span></span>
+          <span class="loaf-callout loaf-callout--mr"><span class="callout-line"></span><span class="callout-label">Slow bake</span></span>
+          <span class="loaf-callout loaf-callout--bl"><span class="callout-line"></span><span class="callout-label">Bold comfort</span></span>
+          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Metabolism+</span></span>
         </div>
         <div class="bread-card-caption">
           <p class="bread-card-name">The Spicy One</p>
-          <span class="bread-card-toggle" aria-hidden="true"><span class="toggle-line"></span><span class="toggle-line"></span></span>
+          <p class="bread-card-subtitle">Comfort bread, with a bite — cheddar meets a clean kick.</p>
         </div>
       </article>
 
       <!-- The Sweet One -->
-      <article class="bread-card" onclick="toggleLoafCard(this)" tabindex="0" role="button" aria-expanded="false" aria-label="Explore The Sweet One">
+      <article class="bread-card">
         <div class="loaf-viz">
           <img src="images/sweet.jpg" alt="The Sweet One — honey goat cheese sourdough" loading="lazy">
           <span class="loaf-callout loaf-callout--tl"><span class="callout-line"></span><span class="callout-label">Goat cheese</span></span>
-          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Raw honey</span></span>
-          <span class="loaf-callout loaf-callout--tr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Sweet-savoury</span></span>
-          <span class="loaf-callout loaf-callout--mr loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Easy digestion</span></span>
-          <span class="loaf-callout loaf-callout--bl loaf-callout--extra"><span class="callout-line"></span><span class="callout-label">Natural sugar</span></span>
+          <span class="loaf-callout loaf-callout--tr"><span class="callout-line"></span><span class="callout-label">Raw honey</span></span>
+          <span class="loaf-callout loaf-callout--mr"><span class="callout-line"></span><span class="callout-label">Sweet-savoury</span></span>
+          <span class="loaf-callout loaf-callout--bl"><span class="callout-line"></span><span class="callout-label">Easy digestion</span></span>
+          <span class="loaf-callout loaf-callout--br"><span class="callout-line"></span><span class="callout-label">Natural sugar</span></span>
         </div>
         <div class="bread-card-caption">
           <p class="bread-card-name">The Sweet One</p>
-          <span class="bread-card-toggle" aria-hidden="true"><span class="toggle-line"></span><span class="toggle-line"></span></span>
+          <p class="bread-card-subtitle">Where sweet meets savoury — goat cheese kissed with raw honey.</p>
         </div>
       </article>
 
@@ -2365,7 +2354,7 @@
     <div class="section-header">
       <span class="section-label">Learn · Bake · Take home</span>
       <h2>Bread School</h2>
-      <p class="workshops-lead">Small-group, hands-on workshops in our Dubai kitchen. We're not open for booking yet — leave your details and we'll reach out the moment a date is set.</p>
+      <p class="workshops-lead">Small-group, hands-on workshops in our Dubai kitchen. Doors haven't opened yet — but the waitlist has. Everyone on it hears first, and a lucky few will be invited to the launch session <strong>on us</strong>.</p>
       <div class="divider"></div>
     </div>
 
@@ -2381,7 +2370,7 @@
           <p class="workshop-kicker">Beginner · ~3 hours</p>
           <p class="workshop-name">Classic Sourdough</p>
           <p class="workshop-desc">Build a starter, shape a boule, score with confidence, bake in a Dutch oven. You leave with a loaf and a jar of live starter.</p>
-          <button class="workshop-cta" type="button" onclick="openWorkshopInterest('Classic Sourdough')">Tell me when it opens</button>
+          <button class="workshop-cta" type="button" onclick="openWorkshopInterest('Classic Sourdough')">Join the waitlist</button>
         </div>
       </article>
 
@@ -2395,7 +2384,7 @@
           <p class="workshop-kicker">Intermediate · ~3 hours</p>
           <p class="workshop-name">Flavoured Sourdough</p>
           <p class="workshop-desc">Inclusions, layering, and signature loaves — za'atar, cheddar &amp; jalapeño, honey &amp; goat cheese. Flavour built into the dough.</p>
-          <button class="workshop-cta" type="button" onclick="openWorkshopInterest('Flavoured Sourdough')">Tell me when it opens</button>
+          <button class="workshop-cta" type="button" onclick="openWorkshopInterest('Flavoured Sourdough')">Join the waitlist</button>
         </div>
       </article>
 
@@ -2409,22 +2398,27 @@
           <p class="workshop-kicker">Indulgent · ~3 hours</p>
           <p class="workshop-name">Chocolate Bread</p>
           <p class="workshop-desc">Enriched doughs, deep dark-chocolate fillings, the swirl technique — the one class that ends with a babka loaf in your hands.</p>
-          <button class="workshop-cta" type="button" onclick="openWorkshopInterest('Chocolate Bread')">Tell me when it opens</button>
+          <button class="workshop-cta" type="button" onclick="openWorkshopInterest('Chocolate Bread')">Join the waitlist</button>
         </div>
       </article>
 
     </div><!-- /workshop-grid -->
 
-    <!-- INTEREST FORM — single form below the cards -->
+    <!-- WAITLIST FORM — the one form below the cards -->
     <div class="workshop-interest" id="workshop-interest">
       <div class="workshop-interest-inner">
         <div class="workshop-interest-copy">
-          <span class="section-label">The list</span>
-          <h3>Be the first to know.</h3>
-          <p>Drop your details. When we set dates, you'll hear from us before we announce — so you can grab a spot before they fill.</p>
+          <span class="section-label">The waitlist</span>
+          <h3>One free seat is waiting. Could be yours.</h3>
+          <p>When we open the first workshop, we'll pull a handful of names from the waitlist — completely on us. Everyone else on the list gets first access before we announce publicly.</p>
+          <ul class="workshop-interest-perks">
+            <li><span class="perk-dot" aria-hidden="true"></span>A chance at a free seat at the launch session</li>
+            <li><span class="perk-dot" aria-hidden="true"></span>First dibs on dates before anyone else</li>
+            <li><span class="perk-dot" aria-hidden="true"></span>Early-bird price when booking opens</li>
+          </ul>
         </div>
         <form class="workshop-interest-form" id="workshop-interest-form" action="https://formspree.io/f/XXXXXXXX" method="POST" novalidate>
-          <input type="hidden" name="_subject" value="Bread School — early-access signup">
+          <input type="hidden" name="_subject" value="Bread School — waitlist signup">
           <label>Name
             <input type="text" name="name" required placeholder="Your name" autocomplete="name">
           </label>
@@ -2434,15 +2428,16 @@
           <label class="span-2">Email
             <input type="email" name="email" required placeholder="you@email.com" autocomplete="email">
           </label>
-          <label class="span-2">Which workshop?
+          <label class="span-2">Which workshop calls you?
             <select name="workshop" id="workshop-select">
               <option value="Classic Sourdough">Classic Sourdough</option>
               <option value="Flavoured Sourdough">Flavoured Sourdough</option>
               <option value="Chocolate Bread">Chocolate Bread</option>
-              <option value="Any / I'm open">I'm open — any of them</option>
+              <option value="Any / I'm open">All of them — surprise me</option>
             </select>
           </label>
-          <button type="submit" class="workshop-interest-submit">Add me to the list</button>
+          <button type="submit" class="workshop-interest-submit">Join the waitlist</button>
+          <p class="workshop-interest-fineprint">No spam, ever. One email when doors open — and a second if your name is drawn.</p>
         </form>
       </div>
     </div>
@@ -2773,23 +2768,7 @@
   }
 
 
-  // ─── LOAF GUIDE — expandable cards ───────────────────────────
-  function toggleLoafCard(el) {
-    const open = el.classList.toggle('is-open');
-    el.setAttribute('aria-expanded', open ? 'true' : 'false');
-  }
-  // Keyboard access (Enter/Space)
-  document.querySelectorAll('.bread-card').forEach(card => {
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggleLoafCard(card);
-      }
-    });
-  });
-
-
-  // ─── BREAD SCHOOL — interest-form flow ───────────────────────
+  // ─── BREAD SCHOOL — waitlist-form flow ───────────────────────
   function openWorkshopInterest(workshopName) {
     const select = document.getElementById('workshop-select');
     if (select && workshopName) {
@@ -2834,8 +2813,8 @@
       const thanks = document.createElement('p');
       thanks.className = 'workshop-thanks';
       thanks.innerHTML = delivered
-        ? `<strong>You're in, ${who}.</strong> We'll be in touch the moment <em>${workshop}</em> opens.`
-        : `<strong>Got it, ${who}.</strong> We've noted your interest in <em>${workshop}</em>. We'll reach out the moment a date is set.`;
+        ? `<strong>You're on the list, ${who}.</strong> We'll reach out the moment the first <em>${workshop}</em> session opens — and you're in the draw for a free seat.`
+        : `<strong>Saved, ${who}.</strong> Your spot on the waitlist for <em>${workshop}</em> is in — we'll be in touch when the first session is set.`;
       form.innerHTML = '';
       form.appendChild(thanks);
     });
