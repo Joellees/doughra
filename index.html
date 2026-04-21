@@ -1159,6 +1159,25 @@
       margin: 0;
     }
 
+    /* ─── EXPLODED-COMPOSITION IMAGE SUPPORT ────────────────────
+       When custom "exploded" loaf images arrive (vertical composition,
+       ingredient labels baked into the image on a warm-tan backdrop),
+       add `data-has-exploded="true"` to that .bread-card. This hides
+       the overlay callouts and switches the image container to the
+       tan-backdrop / contain-fit / 3:5 aesthetic. */
+    .bread-card[data-has-exploded="true"] .loaf-callout { display: none; }
+    .bread-card[data-has-exploded="true"] .loaf-viz {
+      aspect-ratio: 3 / 5;
+      background: var(--stone);
+      border-bottom: none;
+    }
+    .bread-card[data-has-exploded="true"] .loaf-viz img {
+      object-fit: contain;
+    }
+    .bread-card[data-has-exploded="true"]:hover .loaf-viz img {
+      transform: none;
+    }
+
     /* ─── BREAD SCHOOL (workshops) — images + form ──────────────
        Cards now carry imagery, a "coming soon" badge, and a CTA
        that scrolls to an inline interest form. */
